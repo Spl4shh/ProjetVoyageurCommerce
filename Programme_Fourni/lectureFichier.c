@@ -12,6 +12,8 @@ int lire_data(char * nom, Graphe * g, int *n, int *m);
 // affichage du graphe, i.e. du tableau des distances
 void affiche_km(int ** g, int n);
 
+void affiche_une_ville(int ** g, int n, int num_ville);
+
 int main()
 {
 	char nom[30];
@@ -26,6 +28,8 @@ int main()
 		err = lire_data(nom, &G, &n, &m);
 	}while(err == 0);
 	affiche_km(G, n);
+
+	affiche_une_ville(G, n, 2);
 }
 
 int lire_data(char * nom, Graphe * g, int *n, int *m)
@@ -60,9 +64,25 @@ void affiche_km(Graphe g, int n)
 {
 	int i, j;
 	
+	int ville_choisie = 5;
+
 	for(i = 0; i < n; i++)
 	{
-		for(j = 0; j < n; j++) printf("%5d ", g[i][j]);
+		for(j = 0; j < n; j++) {
+			printf("%5d ", g[i][j]);
+		}
 		printf("\n");
+	}		
+	printf("\n");
+}
+
+void affiche_une_ville(Graphe g, int n, int num_ville)
+{
+	int i;
+	
+	for(i = 0; i < n; i++)
+	{
+		printf("%5d ", g[num_ville][i]);
 	}
+	printf("\n");
 }
