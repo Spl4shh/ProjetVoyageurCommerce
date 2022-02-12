@@ -12,6 +12,7 @@ int lire_data(char * nom, Graphe * g, int *n, int *m);
 // affichage du graphe, i.e. du tableau des distances
 void affiche_km(int ** g, int n);
 
+// affichage de la distance entre la ville en question et les autre villes
 void affiche_une_ville(int ** g, int n, int num_ville);
 
 int main()
@@ -32,7 +33,7 @@ int main()
 	affiche_une_ville(G, n, 2);
 }
 
-int lire_data(char * nom, Graphe * g, int *n, int *m)
+int lire_data(char * nom, Graphe * g, int *nb, int *m)
 {
 	char str[15];
 	int i, s1, s2, km;
@@ -42,11 +43,13 @@ int lire_data(char * nom, Graphe * g, int *n, int *m)
 	
 	// la première ligne contient le nombre de sommets n et le nombre d'arêtes m
 	fgets(str, 15, f);
-	sscanf(str, "%d %d", n, m);
+	sscanf(str, "%d %d", nb, m);
 	
 	// allocation dynamique d'un tableau n x n rempli de 0
-	*g = (int **)calloc(sizeof(int *), *n);
-	for (i = 0; i < *n; i++) (*g)[i] = (int *)calloc(sizeof(int), *n);
+	*g = (int **)calloc(sizeof(int *), *nb);
+	for (i = 0; i < *nb; i++){
+		(*g)[i] = (int *)calloc(sizeof(int), *nb);
+	} 
 
 	// lecture du fichier et remplissage du tableau G
 	for (i = 0; i < *m; i++)
