@@ -16,7 +16,7 @@ int main()
 	
 	srand((unsigned int)time(NULL));
 	
-	printf("nombre de permutations à générer : ");
+	printf("nombre de permutations a generer : ");
 	scanf("%d", &nb_perm);
 	
 	t1 = clock();
@@ -29,7 +29,7 @@ int main()
 	t2 = clock();
 	
 	cpu_perm = (double)(t2-t1)/(double)(CLOCKS_PER_SEC);
-	printf("les %d permutations ont été générées en %f secondes\n", nb_perm, cpu_perm);
+	printf("les %d permutations ont ete genere en %f secondes\n", nb_perm, cpu_perm);
 }
 
 // Question : quel sera le résultat pour l'appel affiche(tab+1, 3) ?

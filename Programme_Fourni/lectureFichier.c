@@ -19,13 +19,12 @@ int main()
 	int n, m;
 	int err;
 		
-	do
-	{
-		printf("saisir le nom de fichier de données : ");
-		scanf("%s", nom); while(getchar() != '\n');
+	do{
+		printf("saisir le nom de fichier de donnees : ");
+		scanf("%s", nom); 
+		while(getchar() != '\n');
 		err = lire_data(nom, &G, &n, &m);
-	}
-	while(err == 0);
+	}while(err == 0);
 	affiche_km(G, n);
 }
 
