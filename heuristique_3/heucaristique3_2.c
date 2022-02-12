@@ -39,8 +39,7 @@ int main(int argc, char const *argv[])
       return 0;
 }
 
-int lire_data(char * nom, Graphe * g, int *n, int *m)
-{
+int lire_data(char * nom, Graphe * g, int *n, int *m){
 	char str[15];
 	int i, s1, s2, km;
 	FILE * f = fopen(nom, "r");
@@ -67,8 +66,7 @@ int lire_data(char * nom, Graphe * g, int *n, int *m)
 	return 1;
 }
 
-void affiche_km(Graphe g, int n)
-{
+void affiche_km(Graphe g, int n){
 	int i, j;
 	
 	int ville_choisie = 5;
@@ -83,8 +81,7 @@ void affiche_km(Graphe g, int n)
 	printf("\n");
 }
 
-void affiche_une_ville(Graphe g, int n, int num_ville)
-{
+void affiche_une_ville(Graphe g, int n, int num_ville){
 	int i;
 	
 	for(i = 0; i < n; i++)
@@ -92,4 +89,25 @@ void affiche_une_ville(Graphe g, int n, int num_ville)
 		printf("%5d ", g[num_ville][i]);
 	}
 	printf("\n");
+}
+
+void recherche_voisin_proche(Graphe g, int n, int num_ville){
+	int i;
+	int num_voisin_proche = -1;
+
+	for(i = 0; i < n; i++)
+	{
+		// Permet de s'assurer qu'on ne vas pas boucler sur la ville elle meme
+		if (g[num_ville][i] != 0)
+		{
+			// Si la ville la plus proche n'a pas été définie 
+			// ou que la ville selectionné est plus proche que la ville en mémoire,
+			// on modif la valeur
+			if (num_voisin_proche == -1 || (g[num_ville][i] < g[num_voisin_proche][i]) )
+			{
+				num_voisin_proche = i;
+			}
+		}
+		printf("Le num de la ville la plus proche est : %d \nA une distance de : %5dkm", num_voisin_proche, g[num_voisin_proche][i]);
+	}
 }
