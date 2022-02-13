@@ -15,6 +15,8 @@ void affiche_km(int ** g, int n);
 // affichage de la distance entre la ville en question et les autre villes
 void affiche_une_ville(int ** g, int n, int num_ville);
 
+// recherche la ville la plus proche de la ville "num_ville"
+void recherche_voisin_proche(Graphe g, int n, int num_ville);
 
 int main(int argc, char const *argv[])
 {
@@ -35,6 +37,7 @@ int main(int argc, char const *argv[])
 
       //affichage
       affiche_km(G, n);
+
 
       return 0;
 }
@@ -77,6 +80,9 @@ void affiche_km(Graphe g, int n){
 			printf("%5d ", g[i][j]);
 		}
 		printf("\n");
+
+		recherche_voisin_proche(g, n, i);
+		printf("\n");
 	}		
 	printf("\n");
 }
@@ -103,11 +109,11 @@ void recherche_voisin_proche(Graphe g, int n, int num_ville){
 			// Si la ville la plus proche n'a pas été définie 
 			// ou que la ville selectionné est plus proche que la ville en mémoire,
 			// on modif la valeur
-			if (num_voisin_proche == -1 || (g[num_ville][i] < g[num_voisin_proche][i]) )
+			if (num_voisin_proche == -1 || (g[num_ville][i] < g[num_ville][num_voisin_proche]))
 			{
 				num_voisin_proche = i;
 			}
 		}
-		printf("Le num de la ville la plus proche est : %d \nA une distance de : %5dkm", num_voisin_proche, g[num_voisin_proche][i]);
 	}
+	printf("Le num de la ville la plus proche est : %d a une distance de : %5dkm \n", num_voisin_proche, g[num_ville][num_voisin_proche]);
 }
