@@ -1,20 +1,14 @@
-#include<stdio.h>
-#include<stdlib.h>
+#ifndef LECTUREFICHIER_C
+#define LECTUREFICHIER_C
 
-// définition du type Graphe comme un tableau à 2 dimensions
-// allocation dynamique faite au moment de la lecture des
-// données dans un fichier
-typedef int ** Graphe;
+#include <stdio.h>
+#include <stdlib.h>
+#include "graphe.h"
 
 // lecture des données dans un fichier et construction du graphe
 int lire_data(char * nom, Graphe * g, int *n, int *m);
 
-// affichage du graphe, i.e. du tableau des distances
-void affiche_km(int ** g, int n);
-
-// affichage de la distance entre la ville en question et les autre villes
-void affiche_une_ville(int ** g, int n, int num_ville);
-
+/* Main de test, penser a importer affichage.h
 int main()
 {
 	char nom[30];
@@ -32,6 +26,7 @@ int main()
 
 	affiche_une_ville(G, n, 2);
 }
+*/
 
 int lire_data(char * nom, Graphe * g, int *nb, int *m)
 {
@@ -63,29 +58,4 @@ int lire_data(char * nom, Graphe * g, int *nb, int *m)
 	return 1;
 }
 
-void affiche_km(Graphe g, int n)
-{
-	int i, j;
-	
-	int ville_choisie = 5;
-
-	for(i = 0; i < n; i++)
-	{
-		for(j = 0; j < n; j++) {
-			printf("%5d ", g[i][j]);
-		}
-		printf("\n");
-	}		
-	printf("\n");
-}
-
-void affiche_une_ville(Graphe g, int n, int num_ville)
-{
-	int i;
-	
-	for(i = 0; i < n; i++)
-	{
-		printf("%5d ", g[num_ville][i]);
-	}
-	printf("\n");
-}
+#endif

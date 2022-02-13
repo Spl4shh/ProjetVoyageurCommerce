@@ -1,12 +1,20 @@
-#include<stdio.h>
-#include<time.h>
-#include<stdlib.h>
-#include<time.h>
+#ifndef PERMUTATION_H
+#define PERMUTATION_H
 
-int rnd(int a, int b); // fonction qui retourne un entier au hasard entre a et b
-void permut(int * t, int taille); // fonction qui réalise une permutation des éléments de la table t 
-void affiche(int * t, int taille); // fonction qui affiche les éléments d'un tableau
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
 
+// fonction qui retourne un entier au hasard entre a et b
+int rnd(int a, int b); 
+
+// fonction qui réalise une permutation des éléments de la table t 
+void permut(int * t, int taille);
+
+// fonction qui affiche les éléments d'un tableau
+void affiche_tableau(int * t, int taille); 
+
+/* Main de test
 int main()
 {
 	int tab[] = {21,45,18,37,52,89,63,97,78,11};
@@ -20,31 +28,31 @@ int main()
 	scanf("%d", &nb_perm);
 	
 	t1 = clock();
-	for(i = 0; i < nb_perm; i++)
-	{
+	
+	for(i = 0; i < nb_perm; i++){
 		permut(tab, 10);
-		affiche(tab, 10);
+		affiche_tableau(tab, 10);
 		printf("\n");
 	}
+
 	t2 = clock();
 	
 	cpu_perm = (double)(t2-t1)/(double)(CLOCKS_PER_SEC);
 	printf("les %d permutations ont ete genere en %f secondes\n", nb_perm, cpu_perm);
 }
+*/
 
-// Question : quel sera le résultat pour l'appel affiche(tab+1, 3) ?
+// Question : quel sera le résultat pour l'appel affiche_tableau(tab+1, 3) ?
 // Question : quel sera le résultat pour l'appel permut(tab+1, 3) ?
 
-int rnd(int a, int b)
-{
-    return a + rand() % (b + 1 - a);
+int rnd(int a, int b){
+    return (a + rand() % (b + 1 - a));
 }
 
-void permut(int * t, int taille)
-{
+void permut(int * t, int taille){
 	int i, j, yam;
-	for(i = 0; i < taille-1; i++)
-	{
+
+	for(i = 0; i < taille-1; i++){
 		j = rnd(i, taille-1);
 		yam = t[i];
 		t[i] = t[j];
@@ -52,8 +60,12 @@ void permut(int * t, int taille)
 	}
 }
 
-void affiche(int * t, int taille)
-{
+void affiche_tableau(int * t, int taille){
 	int i;
-	for(i = 0; i < taille; i++) printf("%d ", t[i]);
+
+	for(i = 0; i < taille; i++){
+		printf("%d ", t[i]);
+	}
 }
+
+#endif
