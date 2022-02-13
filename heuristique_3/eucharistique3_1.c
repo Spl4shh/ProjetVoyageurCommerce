@@ -34,6 +34,11 @@ int main(int argc, char const *argv[]){
        liste_ville[i]=r;
    }
 
+
+   for(i=0; i<n; i++){
+       printf("%d ", liste_ville[i]);
+   }
+
 }
 
 
