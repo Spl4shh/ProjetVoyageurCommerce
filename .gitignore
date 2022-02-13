@@ -1,3 +1,6 @@
 #Permet de ne pas push les fichiers .exe dans les dossiers heucaristique_X
-
 */*.exe
+
+#Permet de ne pas avoir les fichier d'IDE
+.vscode/*
+.vscode
