@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include "../Programme_Fourni/graphe.h"
 
+// Calcul du poids total d'un chemin en fcontion d'un graphe, du nb de sommet et de l'ordre des sommets traversé
 int getPoidsTotal(Graphe g, int n, int ordre_ville[]){
 	int somme_poids = 0;
 	int point_a, point_b;
