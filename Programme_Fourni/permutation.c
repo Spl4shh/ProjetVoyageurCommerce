@@ -9,7 +9,7 @@
 int rnd(int a, int b); 
 
 // fonction qui réalise une permutation des éléments de la table t 
-void permut(int * t, int taille);
+void permut_complete(int * t, int taille);
 
 // fonction qui affiche les éléments d'un tableau
 void affiche_tableau(int * t, int taille); 
@@ -30,7 +30,7 @@ int main()
 	t1 = clock();
 	
 	for(i = 0; i < nb_perm; i++){
-		permut(tab, 10);
+		permut_complete(tab, 10);
 		affiche_tableau(tab, 10);
 		printf("\n");
 	}
@@ -49,7 +49,7 @@ int rnd(int a, int b){
     return (a + rand() % (b + 1 - a));
 }
 
-void permut(int * t, int taille){
+void permut_complete(int * t, int taille){
 	int i, j, yam;
 
 	for(i = 0; i < taille-1; i++){
