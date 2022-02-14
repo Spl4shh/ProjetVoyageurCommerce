@@ -5,7 +5,6 @@
 #include "../Programme_Fourni/affichage.c"
 #include "../Programme_Fourni/lectureFichier.c"
 
-#define ITEMS_IN_ARRAY(array)   (sizeof(array) / sizeof(*array))
 
 // recherche la ville la plus proche de la ville "num_ville"
 int recherche_voisin_proche(Graphe g, int n, int num_ville, int liste_ville[]);
@@ -45,35 +44,9 @@ int main(int argc, char const *argv[])
 	liste_ville[ville_actuelle] = 1;
 	ordre_ville[0] = ville_actuelle;
 
-      //affichage
-      //affiche_km(G, n);
-
-
 	printf("ville ou je suis : %d\n", ville_actuelle);
 	for(int i = 0; i < n; i++)
-	{
-		/*
-		//Bug apparait a ce moment la
-		if (i < 10)
-		{
-			printf("\nI de la premiere boucle : %d\n", i);
-			
-			int total = 200;
-			for (int i = 0; i < n; i++)
-			{
-				if (liste_ville[i] != 1 )
-				{
-					total -= 1;
-					
-				}
-				else{
-					printf("Passage a i = %d\n", i);
-				}
-				
-			}			
-		}
-		*/
-		
+	{	
 		ville_suivante = recherche_voisin_proche(G, n, ville_actuelle, liste_ville);
 		
 		//On rentre ici seulement si l'on a pas exploré toutes les villes
