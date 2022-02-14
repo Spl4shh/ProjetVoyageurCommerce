@@ -22,7 +22,6 @@ int getPoidsTotal(Graphe g, int n, int ordre_ville[]){
 		printf("\nPoids actuel : %d", somme_poids);
 		*/
 	}
-
 	return somme_poids;
 }
 
