@@ -4,6 +4,7 @@
 #include "../Programme_Fourni/graphe.h"
 #include "../Programme_Fourni/affichage.c"
 #include "../Programme_Fourni/lectureFichier.c"
+#include "../Fonction/poids.c"
 
 /*
 	Pour l'heuristique 4.2, on reutilise l'heucaristique 3.2 et on créé les fonctions nécéssaires
@@ -64,7 +65,7 @@ int main(int argc, char const *argv[])
 	}
 	
 	// Calcul distance totale
-	int distance_totale = calcul_poids_total(G, n, ordre_ville);
+	int distance_totale = get_poids_total(G, n, ordre_ville);
 
 	// Affichage resultat
 	printf("\nL'ordre de visite est : ");
@@ -96,26 +97,6 @@ int recherche_voisin_proche(Graphe g, int n, int num_ville, int liste_ville[]){
 		}
 	}
 	return num_voisin_proche;
-}
-
-int get_poids_total(Graphe g, int n, int ordre_ville[]){
-	int somme_poids = 0;
-	int point_a, point_b;
-
-	for (int i = 0; i < n-1; i++)
-	{
-		point_a = ordre_ville[i];
-		point_b = ordre_ville[i+1];
-				
-		somme_poids += g[point_a][point_b];
-		
-		/* Debug
-		printf("\nPoint a : %d, Point b : %d", point_a, point_b);
-		printf("\nPoids actuel : %d", somme_poids);
-		*/
-	}
-
-	return somme_poids;
 }
 
 void croiser_point(int point_a, int point_b, int n, int ordre_ville[]){
