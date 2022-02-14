@@ -38,7 +38,6 @@ int main(int argc, char const *argv[])
 
 	liste_ville = malloc(n * sizeof(int));
 	ordre_ville = malloc(n * sizeof(int));
-	printf("Here");
 
 	liste_ville[ville_actuelle] = 1;
 	ordre_ville[0] = ville_actuelle;
@@ -54,7 +53,6 @@ int main(int argc, char const *argv[])
 			ville_actuelle = ville_suivante;
 			liste_ville[ville_actuelle] = 1;
 			ordre_ville[i+1] = ville_actuelle;;
-			printf("ville ou je suis : %d\n", ville_actuelle);
 		}
 	}
 	
