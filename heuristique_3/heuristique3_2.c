@@ -9,7 +9,7 @@
 int recherche_voisin_proche(Graphe g, int n, int num_ville, int liste_ville[]);
 
 // calcul du poids total d'un chemin en fcontion d'un graphe, du nb de sommet et de l'ordre des sommets traversé
-int calcul_poids_total(Graphe g, int n, int ordre_ville[]);
+int get_poids_total(Graphe g, int n, int ordre_ville[]);
 
 int main(int argc, char const *argv[])
 {
@@ -91,7 +91,7 @@ int recherche_voisin_proche(Graphe g, int n, int num_ville, int liste_ville[]){
 	return num_voisin_proche;
 }
 
-int calcul_poids_total(Graphe g, int n, int ordre_ville[]){
+int get_poids_total(Graphe g, int n, int ordre_ville[]){
 	int somme_poids = 0;
 	int point_a, point_b;
 
