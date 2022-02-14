@@ -10,14 +10,13 @@
 int get_poids_total(Graphe g, int n, int *ordre_ville){
 	int somme_poids = 0;
 	int point_a, point_b;
-
+    
 	for (int i = 0; i < n-1; i++)
 	{
+        
 		point_a = ordre_ville[i];
-		point_b = ordre_ville[i+1];
-				
+		point_b = ordre_ville[i+1];	
 		somme_poids += g[point_a][point_b];
-
 	}
 
 	return somme_poids;
@@ -56,22 +55,18 @@ int main(int argc, char const *argv[]){
    
    int liste_ville[n];
    for (int i=0; i<n; i++){
-       liste_ville[n]=i;
+       liste_ville[i]=i;
    }
-   printf("après création liste ville\n");
    
    int poids = get_poids_total(g, n, liste_ville);
-   printf("après 1er get poids liste ville\n");
 
    int meilleur_chemin[n];
    setTable(meilleur_chemin, liste_ville, n);
-    printf("avant boucle");
-   for(int i=0; i<10; i++){
+   for(int i=0; i<100; i++){
        permut_complete(liste_ville, n);
        if(get_poids_total(g, n, liste_ville)<(get_poids_total(g, n, meilleur_chemin))){
            setTable(meilleur_chemin, liste_ville, n);
        }
-       printf("boucle n %d", i);
    }
 
 
