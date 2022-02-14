@@ -55,7 +55,7 @@ int main(int argc, char const *argv[])
 	}
 	
 	// Calcul distance totale
-	int distance_totale = get_poids_total(G, n, ordre_ville);
+	int distance_totale = getPoidsTotal(G, n, ordre_ville);
 
 	// Affichage resultat
 	printf("\nL'ordre de visite est : ");

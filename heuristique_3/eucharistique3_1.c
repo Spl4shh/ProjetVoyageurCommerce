@@ -7,7 +7,7 @@
 #include "../Programme_Fourni/permutation.c"
 
 
-int get_poids_total(Graphe g, int n, int *ordre_ville){
+int getPoidsTotal(Graphe g, int n, int *ordre_ville){
 	int somme_poids = 0;
 	int point_a, point_b;
 
@@ -60,7 +60,7 @@ int main(int argc, char const *argv[]){
    }
    printf("après création liste ville\n");
    
-   int poids = get_poids_total(g, n, liste_ville);
+   int poids = getPoidsTotal(g, n, liste_ville);
    printf("après 1er get poids liste ville\n");
 
    int meilleur_chemin[n];
@@ -68,7 +68,7 @@ int main(int argc, char const *argv[]){
     printf("avant boucle");
    for(int i=0; i<10; i++){
        permut_complete(liste_ville, n);
-       if(get_poids_total(g, n, liste_ville)<(get_poids_total(g, n, meilleur_chemin))){
+       if(getPoidsTotal(g, n, liste_ville)<(getPoidsTotal(g, n, meilleur_chemin))){
            setTable(meilleur_chemin, liste_ville, n);
        }
        printf("boucle n %d", i);
@@ -78,6 +78,6 @@ int main(int argc, char const *argv[]){
    
    printf("Listes des villes : ");
    affiche_tableau(meilleur_chemin, n);
-   printf("\nPoid du voyage : %d ", get_poids_total(g, n, meilleur_chemin));
+   printf("\nPoid du voyage : %d ", getPoidsTotal(g, n, meilleur_chemin));
 }
 

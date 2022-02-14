@@ -14,10 +14,12 @@
 int recherche_voisin_proche(Graphe g, int n, int num_ville, int liste_ville[]);
 
 // calcul du poids total d'un chemin en fcontion d'un graphe, du nb de sommet et de l'ordre des sommets traversé
-int get_poids_total(Graphe g, int n, int ordre_ville[]);
+int getPoidsTotal(Graphe g, int n, int ordre_ville[]);
 
-// permutter 2 points avec un deplacement afin de (dé)croiser une arrete
-void croiser_point(int point_a, int point_b, int n, int ordre_ville[]);
+/* permutter 2 points avec un deplacement afin de (dé)croiser une arrete
+   le point a correspond a depart de la premiere arrete et le point b correspond au depart de la deuxieme arrete
+*/
+void croiserPoint(int point_a, int point_b, int n, int ordre_ville[]);
 
 int main(int argc, char const *argv[])
 {
@@ -65,7 +67,7 @@ int main(int argc, char const *argv[])
 	}
 	
 	// Calcul distance totale
-	int distance_totale = get_poids_total(G, n, ordre_ville);
+	int distance_totale = getPoidsTotal(G, n, ordre_ville);
 
 	// Affichage resultat
 	printf("\nL'ordre de visite est : ");
@@ -99,6 +101,9 @@ int recherche_voisin_proche(Graphe g, int n, int num_ville, int liste_ville[]){
 	return num_voisin_proche;
 }
 
-void croiser_point(int point_a, int point_b, int n, int ordre_ville[]){
-	//Contenu de la fonction qui permettra de croiser/decroiser 2 arretes
+void croiserPoint(int point_a, int point_b, int n, int ordre_ville[]){
+	int tempo;
+
+	tempo = ordre_ville[point_a + 1];
+	ordre_ville[point_a + 1] = ordre_ville[point_b + 1];
 }

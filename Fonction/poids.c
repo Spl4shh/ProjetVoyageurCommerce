@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include "../Programme_Fourni/graphe.h"
 
-int get_poids_total(Graphe g, int n, int ordre_ville[]){
+int getPoidsTotal(Graphe g, int n, int ordre_ville[]){
 	int somme_poids = 0;
 	int point_a, point_b;
 
