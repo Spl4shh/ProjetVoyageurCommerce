@@ -5,7 +5,6 @@
 #include "../Programme_Fourni/affichage.c"
 #include "../Programme_Fourni/lectureFichier.c"
 
-
 // recherche la ville la plus proche de la ville "num_ville"
 int recherche_voisin_proche(Graphe g, int n, int num_ville, int liste_ville[]);
 
@@ -62,6 +61,12 @@ int main(int argc, char const *argv[])
 	// Calcul distance totale
 	int distance_totale = calcul_poids_total(G, n, ordre_ville);
 
+	// Affichage resultat
+	printf("\nL'ordre de visite est : ");
+	for (int i = 0; i < n; i++)
+	{
+		printf(" -> %d", ordre_ville[i]);
+	}
 	printf("\nLe distance totale est de %4d km", distance_totale);
 	
       return 0;
