@@ -5,9 +5,6 @@
 #include <stdlib.h>
 #include "graphe.h"
 
-// lecture des données dans un fichier et construction du graphe
-int lire_data(char * nom, Graphe * g, int *n, int *m);
-
 /* Main de test, penser a importer affichage.h
 int main()
 {
