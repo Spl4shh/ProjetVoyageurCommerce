@@ -17,10 +17,10 @@ int getPoidsTotal(Graphe g, int n, int ordre_ville[]){
 				
 		somme_poids += g[point_a][point_b];
 		
-		
+		/*
 		printf("\nPoint a : %d, Point b : %d", point_a, point_b);
 		printf("\nPoids actuel : %d", somme_poids);
-		
+		*/
 	}
 
 	//On ajoute le retour
