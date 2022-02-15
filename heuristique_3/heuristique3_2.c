@@ -9,7 +9,6 @@
 #include "../Fonction/poids.c"
 #include "../Fonction/recherche.c"
 
-
 int main(int argc, char const *argv[])
 {
       //Variables
@@ -19,11 +18,12 @@ int main(int argc, char const *argv[])
 	int err;
 	int ville_actuelle = 0, ville_suivante;
 	clock_t timer;
+	srand((unsigned int)time(NULL));
       //End Variable
 
       //lecture du fichier
       do{
-		printf("saisir le nom de fichier de donnees : ");
+		printf("Saisir le nom de fichier de donnees : ");
 		scanf("%s", nom); 
 		while(getchar() != '\n');
 		err = lire_data(nom, &G, &n, &m);
@@ -34,9 +34,6 @@ int main(int argc, char const *argv[])
 	ordre_ville sert a sauvegarder l'ordre dans lequel on est passé
 	*/
 	int *liste_ville = NULL, *ordre_ville = NULL;
-	
-	// Declenche l'horloge
-	timer = clock();
 
 	liste_ville = malloc(n * sizeof(int));
 	ordre_ville = malloc(n * sizeof(int));
@@ -44,7 +41,9 @@ int main(int argc, char const *argv[])
 	liste_ville[ville_actuelle] = 1;
 	ordre_ville[0] = ville_actuelle;
 
-	printf("ville ou je suis : %d\n", ville_actuelle);
+	// Declenche l'horloge
+	timer = clock();
+
 	for(int i = 0; i < n; i++)
 	{	
 		ville_suivante = rechercheVoisinProche(G, n, ville_actuelle, liste_ville);
@@ -68,6 +67,7 @@ int main(int argc, char const *argv[])
 		printf(" -> %d", ordre_ville[i]);
 	}
 	printf("\nLe distance totale est de %4d km", distance_totale);
+	
 	printf("\nDuree du calcul : %f secondes", getTempsEcoule(timer));
       return 0;
 }
