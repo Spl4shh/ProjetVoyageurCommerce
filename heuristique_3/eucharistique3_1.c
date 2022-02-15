@@ -44,6 +44,11 @@ int main(int argc, char const *argv[]){
     int n, m;
     int err;
     int poid;
+
+
+    clock_t t1, t2;
+	double cpu_boucle;
+	unsigned long i, j=255, yam=0;
     
     do{
 		printf("saisir le nom de fichier de donnees : ");
@@ -62,14 +67,20 @@ int main(int argc, char const *argv[]){
 
    int meilleur_chemin[n];
    setTable(meilleur_chemin, liste_ville, n);
-   for(int i=0; i<100; i++){
+   for(i=1; i<j; i++){
        permut_complete(liste_ville, n);
        if(get_poids_total(g, n, liste_ville)<(get_poids_total(g, n, meilleur_chemin))){
            setTable(meilleur_chemin, liste_ville, n);
        }
+       yam += i;
    }
 
 
+    t2 = clock();
+	printf("nombre de ticks d'horloge après la boucle : %lu\n", t2);
+	
+	cpu_boucle = (double)(t2-t1)/(double)(CLOCKS_PER_SEC);
+	printf("temps cpu de la boucle en secondes %f\n", cpu_boucle);
    
    printf("Listes des villes : ");
    affiche_tableau(meilleur_chemin, n);
