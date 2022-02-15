@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "../Programme_Fourni/graphe.h"
 #include "../Programme_Fourni/affichage.c"
 #include "../Programme_Fourni/lectureFichier.c"
+#include "../Programme_Fourni/calculTemps.c"
 #include "../Fonction/poids.c"
 #include "../Fonction/recherche.c"
 
@@ -16,6 +18,7 @@ int main(int argc, char const *argv[])
 	int n, m;
 	int err;
 	int ville_actuelle = 0, ville_suivante;
+	clock_t timer;
       //End Variable
 
       //lecture du fichier
@@ -32,6 +35,8 @@ int main(int argc, char const *argv[])
 	*/
 	int *liste_ville = NULL, *ordre_ville = NULL;
 	
+	// Declenche l'horloge
+	timer = clock();
 
 	liste_ville = malloc(n * sizeof(int));
 	ordre_ville = malloc(n * sizeof(int));
@@ -63,6 +68,6 @@ int main(int argc, char const *argv[])
 		printf(" -> %d", ordre_ville[i]);
 	}
 	printf("\nLe distance totale est de %4d km", distance_totale);
-	
+	printf("\nDuree du calcul : %f secondes", getTempsEcoule(timer));
       return 0;
 }
