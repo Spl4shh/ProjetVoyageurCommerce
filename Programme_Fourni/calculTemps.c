@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<time.h>
 
-void getTempsEcoule(clock_t t1){
+double getTempsEcoule(clock_t t1){
 	clock_t t2 = clock();
 	double cpu_boucle;
 	

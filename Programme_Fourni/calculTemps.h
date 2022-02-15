@@ -4,6 +4,6 @@
 
       //Calcul le temps entre le moment ou cette fonction est appellé, est le moment ou t1 a été declenché
 
-      void getTempsEcoule(clock_t t1);
+      double getTempsEcoule(clock_t t1);
 
 #endif
