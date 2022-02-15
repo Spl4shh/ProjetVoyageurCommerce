@@ -5,6 +5,7 @@
 #include "../Programme_Fourni/affichage.c"
 #include "../Programme_Fourni/lectureFichier.c"
 #include "../Programme_Fourni/permutation.c"
+#include "../Programme_Fourni/calculTemps.c"
 
 
 int get_poids_total(Graphe g, int n, int *ordre_ville){
@@ -48,7 +49,8 @@ int main(int argc, char const *argv[]){
 
     clock_t t1, t2;
 	double cpu_boucle;
-	unsigned long i, j=255, yam=0;
+	unsigned long i, j=10000;
+    t1 = clock();
     
     do{
 		printf("saisir le nom de fichier de donnees : ");
@@ -72,12 +74,10 @@ int main(int argc, char const *argv[]){
        if(get_poids_total(g, n, liste_ville)<(get_poids_total(g, n, meilleur_chemin))){
            setTable(meilleur_chemin, liste_ville, n);
        }
-       yam += i;
    }
 
 
-    t2 = clock();
-	printf("nombre de ticks d'horloge après la boucle : %lu\n", t2);
+    t2 = getTempsEcoule(t1);
 	
 	cpu_boucle = (double)(t2-t1)/(double)(CLOCKS_PER_SEC);
 	printf("temps cpu de la boucle en secondes %f\n", cpu_boucle);
