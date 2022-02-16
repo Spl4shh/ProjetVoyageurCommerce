@@ -40,6 +40,24 @@ int isNotIn(int r, int *p, int l){
     return 1;
 }
 
+
+void meilleurCheminRandom(Graphe g, int n, int *liste_ville){
+   int poids = get_poids_total(g, n, liste_ville);
+    unsigned long j=10000;
+
+    int chemin_test[n];
+   setTable(chemin_test, liste_ville, n);
+
+   for(int i=1; i<j; i++){
+       permut_complete(liste_ville, n);
+       if(get_poids_total(g, n, liste_ville)>(get_poids_total(g, n, chemin_test))){
+           setTable(liste_ville,chemin_test , n);
+       }
+   }
+
+   
+}
+
 int main(int argc, char const *argv[]){
     char nom[30];
     Graphe g = NULL;
@@ -50,7 +68,7 @@ int main(int argc, char const *argv[]){
 
     clock_t t1, t2;
 	double cpu_boucle;
-	unsigned long i, j=10000;
+	
     t1 = clock();
     
     do{
@@ -66,16 +84,9 @@ int main(int argc, char const *argv[]){
        liste_ville[i]=i;
    }
    
-   int poids = get_poids_total(g, n, liste_ville);
 
-   int meilleur_chemin[n];
-   setTable(meilleur_chemin, liste_ville, n);
-   for(i=1; i<j; i++){
-       permut_complete(liste_ville, n);
-       if(get_poids_total(g, n, liste_ville)<(get_poids_total(g, n, meilleur_chemin))){
-           setTable(meilleur_chemin, liste_ville, n);
-       }
-   }
+   
+   meilleurCheminRandom( g, n, liste_ville);
 
 
     t2 = getTempsEcoule(t1);
@@ -84,7 +95,7 @@ int main(int argc, char const *argv[]){
 	printf("temps cpu de la boucle en secondes %f\n", cpu_boucle);
    
    printf("Listes des villes : ");
-   affiche_tableau(meilleur_chemin, n);
-   printf("\nPoid du voyage : %d ", get_poids_total(g, n, meilleur_chemin));
+   affiche_tableau(liste_ville, n);
+   printf("\nPoid du voyage : %d ", get_poids_total(g, n, liste_ville));
 }
 
