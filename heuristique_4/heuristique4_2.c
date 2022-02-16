@@ -7,16 +7,19 @@
 #include "../Programme_Fourni/affichage.c"
 #include "../Programme_Fourni/lectureFichier.c"
 #include "../Programme_Fourni/calculTemps.c"
+
 #include "../Fonction/poids.c"
 #include "../Fonction/recherche.c"
 #include "../Fonction/randomNumber.c"
+#include "../Fonction/affichageCombine.c"
 
 #define TIMER_LIMIT 1.0
 /*
 	Pour l'heuristique 4.2, on reutilise l'heucaristique 3.2 et on créé les fonctions nécéssaires
 */
 
-/* Permutter 2 points avec un deplacement afin de (dé)croiser une arrete
+/* 
+   Permutter 2 points avec un deplacement afin de (dé)croiser une arrete
    Le point a correspond a depart de la premiere arrete et le point b correspond au depart de la deuxieme arrete
    Conditions : 
 	point_a >= 0 
@@ -27,6 +30,13 @@
    Avec n la taille du tableau
 */
 void croiserPoint(int point_a, int point_b, int n, int ordre_ville[], int nouveau_tableau[]);
+
+/*
+	Recherche le parcous avec le plus faible poids.
+	Effectue des permutations aleatoires et compare son poids avec le poids du chemion actuel.
+	Effectue des permutations pendant TIMER_LIMIT.
+*/
+void rechercheParcoursCroisement(Graphe G, clock_t timer, int n, int ordre_ville[], int new_ordre_ville[]);
 
 int main(int argc, char const *argv[])
 {
@@ -78,17 +88,44 @@ int main(int argc, char const *argv[])
 	
 
 	// Affichage l'ordre selon le voisin le plus proche
-	printf("\nL'ordre de visite de base est : ");
-	for (int i = 0; i < n; i++){
-		printf(" -> %d", ordre_ville[i]);
-	}
-	printf("\nLe distance totale est de %4d km", getPoidsTotal(G, n, ordre_ville));
-	
+	printf("\nAvec la recherche du plus proche voisin :");	
+	afficheCheminPoids(G, n, ordre_ville);
 
+	// Definition du nouveau tableau pour faire les tests
 	int *new_ordre_ville = NULL;
 	new_ordre_ville = malloc(n * sizeof(int));
 
 	//Fait des recherches pendant TIMER_LIMIT secondes
+	rechercheParcoursCroisement(G, timer, n, ordre_ville, new_ordre_ville);
+
+	// Affichage resultat aprezs permutation
+	printf("\n\nAvec des permutations aleatoire :");	
+	afficheCheminPoids(G, n, ordre_ville);
+
+	affichageTimer(timer);
+
+      return 0;
+}
+
+void croiserPoint(int point_a, int point_b, int n, int ordre_ville[], int nouveau_tableau[]){
+	for (int i = 0; i < n; i++){
+		nouveau_tableau[i] = ordre_ville[i];
+	}
+
+	if (point_a >= 0 && point_a < n-1 && point_b < n-1 && point_a < point_b && (point_b - point_a) > 1){ 
+		int tempo;
+		
+		tempo = ordre_ville[point_a + 1];
+		nouveau_tableau[point_a + 1] = nouveau_tableau[point_b + 1];
+		nouveau_tableau[point_b + 1] = nouveau_tableau[point_b];
+		nouveau_tableau[point_b] = tempo;
+
+	}else{
+		printf("\nLes conditions d'utilisation de la fonction ne sont pas respecte, Merci de verifier le code.\n Point 1 = %d, Point 2 = %d\n", point_a, point_b);
+	}	
+}
+
+void rechercheParcoursCroisement(Graphe G, clock_t timer, int n, int ordre_ville[], int new_ordre_ville[]){
 	while (getTempsEcoule(timer) < TIMER_LIMIT){
 		//Choisir 2 points au hasard
 
@@ -122,31 +159,4 @@ int main(int argc, char const *argv[])
 			*/
 		}
 	}
-
-	// Affichage resultat
-	printf("\nL'ordre de visite conserve est : ");
-	for (int i = 0; i < n; i++){
-		printf(" -> %d", ordre_ville[i]);
-	}
-	printf("\nLe distance totale conserve est de %4d km", getPoidsTotal(G, n, ordre_ville));
-
-      return 0;
-}
-
-void croiserPoint(int point_a, int point_b, int n, int ordre_ville[], int nouveau_tableau[]){
-	for (int i = 0; i < n; i++){
-		nouveau_tableau[i] = ordre_ville[i];
-	}
-
-	if (point_a >= 0 && point_a < n-1 && point_b < n-1 && point_a < point_b && (point_b - point_a) > 1){ 
-		int tempo;
-		
-		tempo = ordre_ville[point_a + 1];
-		nouveau_tableau[point_a + 1] = nouveau_tableau[point_b + 1];
-		nouveau_tableau[point_b + 1] = nouveau_tableau[point_b];
-		nouveau_tableau[point_b] = tempo;
-
-	}else{
-		printf("\nLes conditions d'utilisation de la fonction ne sont pas respecte, Merci de verifier le code.\n Point 1 = %d, Point 2 = %d\n", point_a, point_b);
-	}	
 }

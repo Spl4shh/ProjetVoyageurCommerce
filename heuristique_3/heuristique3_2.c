@@ -6,8 +6,10 @@
 #include "../Programme_Fourni/affichage.c"
 #include "../Programme_Fourni/lectureFichier.c"
 #include "../Programme_Fourni/calculTemps.c"
+
 #include "../Fonction/poids.c"
 #include "../Fonction/recherche.c"
+#include "../Fonction/affichageCombine.c"
 
 int main(int argc, char const *argv[])
 {
@@ -61,13 +63,8 @@ int main(int argc, char const *argv[])
 	int distance_totale = getPoidsTotal(G, n, ordre_ville);
 
 	// Affichage resultat
-	printf("\nL'ordre de visite est : ");
-	for (int i = 0; i < n; i++)
-	{
-		printf(" -> %d", ordre_ville[i]);
-	}
-	printf("\nLe distance totale est de %4d km", distance_totale);
+	afficheCheminPoids(G, n, ordre_ville);
+	affichageTimer(timer);
 	
-	printf("\nDuree du calcul : %f secondes", getTempsEcoule(timer));
       return 0;
 }
