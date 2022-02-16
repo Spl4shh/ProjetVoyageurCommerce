@@ -1,13 +1,15 @@
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include <time.h>
 
 #include "../Programme_Fourni/graphe.h"
 #include "../Programme_Fourni/affichage.c"
-#include "../Programme_Fourni/calculTemps.c"
 #include "../Programme_Fourni/lectureFichier.c"
+#include "../Programme_Fourni/calculTemps.c"
 #include "../Fonction/poids.c"
 #include "../Fonction/recherche.c"
+#include "../Fonction/randomNumber.c"
 
 #define TIMER_LIMIT 1.0
 /*
@@ -24,10 +26,7 @@
 	point_b - point_a > 1
    Avec n la taille du tableau
 */
-int* croiserPoint(int point_a, int point_b, int n, int ordre_ville[]);
-
-// Permet de copier un tableau d'entier
-void copieTableau(int** tab1, int* tab2, int taille);
+void croiserPoint(int point_a, int point_b, int n, int ordre_ville[], int nouveau_tableau[]);
 
 int main(int argc, char const *argv[])
 {
@@ -38,6 +37,7 @@ int main(int argc, char const *argv[])
 	int err;
 	int ville_actuelle = 0, ville_suivante;
 	clock_t timer;
+	srand((unsigned int)time(NULL));
       //End Variable
 
       //lecture du fichier
@@ -53,15 +53,15 @@ int main(int argc, char const *argv[])
 	ordre_ville sert a sauvegarder l'ordre dans lequel on est passé
 	*/
 	int *liste_ville = NULL, *ordre_ville = NULL;
-	
-	// Declenche l'horloge
-	timer = clock();
 
 	liste_ville = malloc(n * sizeof(int));
 	ordre_ville = malloc(n * sizeof(int));
 
 	liste_ville[ville_actuelle] = 1;
 	ordre_ville[0] = ville_actuelle;
+
+	//Declenche l'horloge
+	timer = clock();
 
 	for(int i = 0; i < n; i++)
 	{	
@@ -76,60 +76,77 @@ int main(int argc, char const *argv[])
 		}
 	}
 	
-	// Calcul distance totale
-	int distance_totale = getPoidsTotal(G, n, ordre_ville);
 
-	// Affichage resultat
+	// Affichage l'ordre selon le voisin le plus proche
 	printf("\nL'ordre de visite de base est : ");
-	for (int i = 0; i < n; i++)
-	{
+	for (int i = 0; i < n; i++){
 		printf(" -> %d", ordre_ville[i]);
 	}
-	printf("\nLe distance totale est de %4d km", distance_totale);
+	printf("\nLe distance totale est de %4d km", getPoidsTotal(G, n, ordre_ville));
 	
+
 	int *new_ordre_ville = NULL;
 	new_ordre_ville = malloc(n * sizeof(int));
 
-	int new_distance;
-
 	//Fait des recherches pendant TIMER_LIMIT secondes
 	while (getTempsEcoule(timer) < TIMER_LIMIT){
+		//Choisir 2 points au hasard
+
+		int nb1 = randomNumber(0, n-4); // n-4 pour laisser la place a l'autre nombre d'etre selectionné
+		int nb2 = randomNumber(0, n-2);
+		while(nb2 <= (nb1 + 1)){
+			nb2 = randomNumber(0, n-2);
+		}
 		
-		//Choisir 2 point au hasard
+		croiserPoint(nb1, nb2, n, ordre_ville, new_ordre_ville);
 		
-		
-		new_ordre_ville = croiserPoint(1, 3, n, ordre_ville);
-		
-		printf("\nL'ordre de visite est : ");
+		/* DEBUG  Affiche chaque ordre de visite testé lors des permutations
+		printf("\nL'ordre de visite teste est : ");
 		for (int i = 0; i < n; i++){
 			printf(" -> %d", new_ordre_ville[i]);
 		}
-		new_distance = getPoidsTotal(G, n, new_ordre_ville);
-		printf("\nLe distance totale est de %4d km", new_distance);
+		printf("\nLe distance totale teste est de %4d km", getPoidsTotal(G, n, new_ordre_ville));
+		*/
 
-		if (distance_totale > new_distance){
-			ordre_ville = new_ordre_ville;
-		} 
+		if (getPoidsTotal(G, n, ordre_ville) > getPoidsTotal(G, n, new_ordre_ville)){
+			for (int i = 0; i < n; i++){
+				ordre_ville[i] = new_ordre_ville[i];
+			}
+			
+			/*DEBUG Affiche lorsqu'il y a un changement d'ordre de ville lors de la permutation
+			printf("\nL'ordre de visite retenue est : ");
+			for (int i = 0; i < n; i++){
+				printf(" -> %d", ordre_ville[i]);
+			}
+			printf("\nLe distance retenue est de %4d km", getPoidsTotal(G, n, ordre_ville));
+			*/
+		}
 	}
 
-
+	// Affichage resultat
+	printf("\nL'ordre de visite conserve est : ");
+	for (int i = 0; i < n; i++){
+		printf(" -> %d", ordre_ville[i]);
+	}
+	printf("\nLe distance totale conserve est de %4d km", getPoidsTotal(G, n, ordre_ville));
 
       return 0;
 }
 
-int* croiserPoint(int point_a, int point_b, int n, int ordre_ville[]){
-	if (point_a >= 0 && point_a < n-1 && point_b < n-1 && point_a < point_b && (point_b - point_a) > 1)
-	{ 
+void croiserPoint(int point_a, int point_b, int n, int ordre_ville[], int nouveau_tableau[]){
+	for (int i = 0; i < n; i++){
+		nouveau_tableau[i] = ordre_ville[i];
+	}
+
+	if (point_a >= 0 && point_a < n-1 && point_b < n-1 && point_a < point_b && (point_b - point_a) > 1){ 
 		int tempo;
-
+		
 		tempo = ordre_ville[point_a + 1];
-		ordre_ville[point_a + 1] = ordre_ville[point_b + 1];
-		ordre_ville[point_b + 1] = ordre_ville[point_b];
-		ordre_ville[point_b] = tempo;
+		nouveau_tableau[point_a + 1] = nouveau_tableau[point_b + 1];
+		nouveau_tableau[point_b + 1] = nouveau_tableau[point_b];
+		nouveau_tableau[point_b] = tempo;
 
-		return ordre_ville;
 	}else{
-		printf("Les conditions d'utilisation de la fonction ne sont pas respecte, Merci de verifier le code.\nTableau d'origine retourne\n");
-		return(ordre_ville);
+		printf("\nLes conditions d'utilisation de la fonction ne sont pas respecte, Merci de verifier le code.\n Point 1 = %d, Point 2 = %d\n", point_a, point_b);
 	}	
 }
