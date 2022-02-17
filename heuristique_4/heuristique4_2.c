@@ -9,6 +9,7 @@
 #include "../Programme_Fourni/calculTemps.c"
 
 #include "../Fonction/poids.c"
+#include "../Fonction/table.c"
 #include "../Fonction/recherche.c"
 #include "../Fonction/randomNumber.c"
 #include "../Fonction/affichageCombine.c"
@@ -20,7 +21,7 @@
 
 /* 
    Permutter 2 points avec un deplacement afin de (dé)croiser une arrete
-   Le point a correspond a depart de la premiere arrete et le point b correspond au depart de la deuxieme arrete
+   Le point a correspond au depart de la premiere arrete et le point b correspond au depart de la deuxieme arrete
    Conditions : 
 	point_a >= 0 
 	point_a < n-1
@@ -108,9 +109,7 @@ int main(int argc, char const *argv[])
 }
 
 void croiserPoint(int point_a, int point_b, int n, int ordre_ville[], int nouveau_tableau[]){
-	for (int i = 0; i < n; i++){
-		nouveau_tableau[i] = ordre_ville[i];
-	}
+	copieTable(nouveau_tableau, ordre_ville, n);
 
 	if (point_a >= 0 && point_a < n-1 && point_b < n-1 && point_a < point_b && (point_b - point_a) > 1){ 
 		int tempo;
@@ -146,9 +145,7 @@ void rechercheParcoursCroisement(Graphe G, clock_t timer, int n, int ordre_ville
 		*/
 
 		if (getPoidsTotal(G, n, ordre_ville) > getPoidsTotal(G, n, new_ordre_ville)){
-			for (int i = 0; i < n; i++){
-				ordre_ville[i] = new_ordre_ville[i];
-			}
+			copieTable(ordre_ville, new_ordre_ville, n);
 			
 			/*DEBUG Affiche lorsqu'il y a un changement d'ordre de ville lors de la permutation
 			printf("\nL'ordre de visite retenue est : ");
