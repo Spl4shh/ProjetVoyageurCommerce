@@ -2,6 +2,7 @@
 	#define AFFICHAGECOMBINE_C
 
 	#include "../Programme_Fourni/graphe.h"
+	#include "../Fonction/poids.c"
 
       // Affichage du chemin en parametre ainsi que son poids total
 	void afficheCheminPoids(Graphe G, int n, int ordre_ville[]){
