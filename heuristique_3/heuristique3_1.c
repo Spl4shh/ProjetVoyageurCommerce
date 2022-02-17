@@ -14,14 +14,15 @@
 
 #define TIMER_LIMIT 2.0
 
-// Description de la fonction
+//créer un chemin rapide passant par tout les points, de façon aléatoire 
+//avec g le graphe, n le nombre de ville (longueur de la table qui suit), ordre_ville la table de ville que l'on veut renvoyer
+//et timer, le minuteur pour arreter la fonction avec le temps
 void meilleurCheminRandom(Graphe g, int n, int *liste_ville, clock_t timer);
 
-// Description de la fonction
+//retourne le poid total du circuit choisis, 
 int get_poids_total(Graphe g, int n, int *ordre_ville);
 
-// Description de la fonction
-int isNotIn(int r, int *p, int l);
+
 
 int main(int argc, char const *argv[]){
     char nom[30];
@@ -79,13 +80,4 @@ int get_poids_total(Graphe g, int n, int *ordre_ville){
 	}
 
 	return somme_poids;
-}
-
-int isNotIn(int r, int *p, int l){
-    for (int i = 0; i < l; i++){
-        if (r == p[i]){
-            return 0;
-        }
-    }
-    return 1;
 }
