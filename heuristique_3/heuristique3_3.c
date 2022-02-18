@@ -13,7 +13,7 @@
 #include "../Fonction/table.c"
 #include "../Fonction/poids.c"
 
-#define TIMER_LIMIT 10.0
+#define TIMER_LIMIT 5.0
 
 
 //décale les élément d'une table vers la gauche
@@ -22,25 +22,21 @@ void decalageVersGauche(int *table, int n);
 //insert un élément qui viens de la droite de la table
 void insererElementDroite(int decalage, int rangDep, int *liste);
 
-//appel cheminParInsertion en boucle pendant 2 seconde avec des liste différentes, variant aléatoirement
+//appel cheminParInsertion en boucle pendant TIMER_LIMIT avec des listes différentes, variant aléatoirement
 void rechercheCheminInsertion(Graphe g, int n, int *liste_ville, clock_t timer);
 
 //cherche un chemin rapide en inserant de nouvelle ville une par une, en vérifiant quelle insertion est la plus rapide
 void cheminParInsertion(Graphe g, int n, int *liste_ville);
 
-//retourne le poid total du circuit choisis, 
-int get_poids_total(Graphe g, int n, int *ordre_ville);
-
-
-
 int main(int argc, char const *argv[]){
+    // Variables
     char nom[30];
     Graphe g = NULL;
     int n, m;
     int err;
-
     clock_t t1;
 	double cpu_boucle;
+    // END Variable
 
     do{
 		printf("saisir le nom de fichier de donnees : ");
@@ -49,7 +45,11 @@ int main(int argc, char const *argv[]){
 		err = lire_data(nom, &g, &n, &m);
 	}while(err == 0);
    
-    int liste_ville[n];
+    int *liste_ville = NULL;
+
+	liste_ville = malloc(n * sizeof(int));
+    
+
     for (int i = 0; i < n; i++){
         liste_ville[i] = i;
     }
@@ -60,7 +60,6 @@ int main(int argc, char const *argv[]){
 
     affichageTimer(t1);
     afficheCheminPoids(g, n, liste_ville);
-    
 }
 
 
@@ -72,9 +71,8 @@ void rechercheCheminInsertion(Graphe g, int n, int *liste_ville, clock_t timer){
 
     while (getTempsEcoule(timer) < TIMER_LIMIT){    
         
-        ////ici
         cheminParInsertion(g, n, chemin_test);  //création du résultat de la seed (= trie de la table donnée aléarement)
-        ////la
+
         if(get_poids_total(g, n, liste_ville) > (get_poids_total(g, n, chemin_test))){
             copieTable(liste_ville, chemin_test, n);            //on sauvegarde la meilleure perf
         } 
@@ -90,20 +88,17 @@ void cheminParInsertion(Graphe g, int n, int *liste_ville){
     int chemin_test[n];
     copieTable(chemin_test, liste_ville, n);   //initilisation de la table de test
     
-        for(int checked=2; checked<n-1; checked++){     //pour chaque ville ajoutée
-            for(int j=0; j<checked; j++){               //pour chaque position de ville testée
+        for(int checked = 2; checked < n-1; checked++){     //pour chaque ville ajoutée
+            for(int j = 0; j < checked; j++){               //pour chaque position de ville testée
                 insererElementDroite(1, checked-j, chemin_test);
 
-                if(get_poids_total(g, checked, chemin_test)<get_poids_total(g, checked, liste_ville)){
+                if(getPoidsTotal(g, checked, chemin_test) < getPoidsTotal(g, checked, liste_ville)){
                     copieTable(liste_ville, chemin_test, n);    //on sauvegarde la meilleure performance
                 }
             }
          
         }
 }
-
-
-
 
 void decalageVersGauche(int *table, int n){
         int save=table[0];  //on stock la donnée qui va être écrasée dans une variable
@@ -117,21 +112,4 @@ void insererElementDroite(int decalage, int rangDep, int *liste){
     for (int i=rangDep; i>rangDep-decalage; i--){
         decalageVersGauche(&liste[i], 2);   //on cherche à inverser la positon  de 2 éléments de la partie de la table
     }
-}
-
-
-
-
-
-int get_poids_total(Graphe g, int n, int *ordre_ville){
-	int somme_poids = 0;
-	int point_a, point_b;
-    
-	for (int i = 0; i < n-1; i++){
-		point_a = ordre_ville[i];
-		point_b = ordre_ville[i+1];	
-		somme_poids += g[point_a][point_b];
-	}
-
-	return somme_poids;
 }
