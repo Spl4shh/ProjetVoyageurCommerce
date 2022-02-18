@@ -55,11 +55,8 @@ int main(int argc, char const *argv[]){
    
     t1 = clock();
 
-    // Fait des recherches pendant TIMER_LIMIT
-    //cheminParInsertion(g, n, liste_ville, t1);
     rechercheCheminInsertion(g, n, liste_ville, t1);
 
-    // Affichage
     affichageTimer(t1);
     afficheCheminPoids(g, n, liste_ville);
     
@@ -67,15 +64,16 @@ int main(int argc, char const *argv[]){
 
 
 void rechercheCheminInsertion(Graphe g, int n, int *liste_ville, clock_t timer){
+    
     int chemin_test[n];
-    copieTable(chemin_test, liste_ville, n);
+    copieTable(chemin_test, liste_ville, n);//initilisation de la table de test
     
 
-    while (getTempsEcoule(timer) < TIMER_LIMIT){
-        permut_complete(chemin_test, n);
-        cheminParInsertion(g, n, liste_ville);
+    while (getTempsEcoule(timer) < TIMER_LIMIT){    
+        permut_complete(chemin_test, n);        //nouvelle seed
+        cheminParInsertion(g, n, liste_ville);  //création du résultat de la seed (= trie de la table donnée aléarement)
         if(get_poids_total(g, n, liste_ville) > (get_poids_total(g, n, chemin_test))){
-            copieTable(liste_ville, chemin_test, n);
+            copieTable(liste_ville, chemin_test, n);            //on sauvegarde la meilleure perf
         } 
     }
 }
@@ -83,55 +81,36 @@ void rechercheCheminInsertion(Graphe g, int n, int *liste_ville, clock_t timer){
 
 
 void cheminParInsertion(Graphe g, int n, int *liste_ville){
-    //int checked=2;
+  
     int chemin_test[n];
-    copieTable(chemin_test, liste_ville, n);
-    //while (getTempsEcoule(timer) < TIMER_LIMIT){
-        //for(int i=0; i<n; i++){
-        for(int checked=2; checked<n-1; checked++){
-            for(int j=0; j<checked; j++){
-                //insererDansTable(j, i, n, liste_ville)
+    copieTable(chemin_test, liste_ville, n);   //initilisation de la table de test
+    
+        for(int checked=2; checked<n-1; checked++){     //pour chaque ville ajoutée
+            for(int j=0; j<checked; j++){               //pour chaque position de ville testée
                 insererElementDroite(1, checked-j, chemin_test);
-                /*
-                printf("Poids actuel du chemin sauvegarde : %d \n", get_poids_total(g, checked, liste_ville) );
-                printf("Poids actuel du chemin teste : %d\n", get_poids_total(g, checked, chemin_test));
-                */
+
                 if(get_poids_total(g, checked, chemin_test)<get_poids_total(g, checked, liste_ville)){
-                    copieTable(liste_ville, chemin_test, n);
-                    //printf("nouveau meilleur chemin trouvé!\n");
+                    copieTable(liste_ville, chemin_test, n);    //on sauvegarde la meilleure performance
                 }
             }
-            //printf("Nombre de villes dans la liste : %d\n", checked);
-            //afficheCheminPoids(g, n, liste_ville);
-            //checked++;
+         
         }
 }
 
 
-/*
-//p : position d'insertion
-//x : valeur à inserer
-//n : longueur de la table (pas forcément la longueur maximal de la table, juste la longueur concernée)
-void insererDansTable(int p, int x, int n, int *liste_ville){
-    for (int i=n; i>p; i--){
-        
-    }
-    
-}*/
-
 
 
 void decalageVersGauche(int *table, int n){
-        int save=table[0];
-      for(int i=0; i<n; i++){
+        int save=table[0];  //on stock la donnée qui va être écrasée dans une variable
+      for(int i=0; i<=n; i++){
         table[i]=table[i+1];
       }
-      table[n-1]=save;
+      table[n]=save;  //on ressort la donnée precedemment écrasée
 }
 
 void insererElementDroite(int decalage, int rangDep, int *liste){
     for (int i=rangDep; i>rangDep-decalage; i--){
-        decalageVersGauche(&liste[i], 2);
+        decalageVersGauche(&liste[i], 1);   //1 pour décaler de 1
     }
 }
 
