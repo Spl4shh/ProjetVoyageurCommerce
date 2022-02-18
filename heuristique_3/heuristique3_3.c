@@ -70,11 +70,15 @@ void rechercheCheminInsertion(Graphe g, int n, int *liste_ville, clock_t timer){
     
 
     while (getTempsEcoule(timer) < TIMER_LIMIT){    
-        permut_complete(chemin_test, n);        //nouvelle seed
-        cheminParInsertion(g, n, liste_ville);  //création du résultat de la seed (= trie de la table donnée aléarement)
+        
+        ////ici
+        cheminParInsertion(g, n, chemin_test);  //création du résultat de la seed (= trie de la table donnée aléarement)
+        ////la
         if(get_poids_total(g, n, liste_ville) > (get_poids_total(g, n, chemin_test))){
             copieTable(liste_ville, chemin_test, n);            //on sauvegarde la meilleure perf
         } 
+        permut_complete(chemin_test, n);        //nouvelle seed
+        
     }
 }
     
