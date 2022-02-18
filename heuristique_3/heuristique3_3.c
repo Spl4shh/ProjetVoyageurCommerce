@@ -12,7 +12,7 @@
 #include "../Fonction/table.c"
 #include "../Fonction/poids.c"
 
-#define TIMER_LIMIT 2.0
+#define TIMER_LIMIT 10.0
 
 
 //décale les élément d'une table vers la gauche
@@ -106,15 +106,15 @@ void cheminParInsertion(Graphe g, int n, int *liste_ville){
 
 void decalageVersGauche(int *table, int n){
         int save=table[0];  //on stock la donnée qui va être écrasée dans une variable
-      for(int i=0; i<=n; i++){
+      for(int i=0; i<n; i++){
         table[i]=table[i+1];
       }
-      table[n]=save;  //on ressort la donnée precedemment écrasée
+      table[n-1]=save;  //on ressort la donnée precedemment écrasée
 }
 
 void insererElementDroite(int decalage, int rangDep, int *liste){
     for (int i=rangDep; i>rangDep-decalage; i--){
-        decalageVersGauche(&liste[i], 1);   //1 pour décaler de 1
+        decalageVersGauche(&liste[i], 2);   //on cherche à inverser la positon  de 2 éléments de la partie de la table
     }
 }
 
