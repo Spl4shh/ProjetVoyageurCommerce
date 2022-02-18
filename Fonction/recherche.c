@@ -16,7 +16,7 @@ int rechercheVoisinProche(Graphe g, int n, int num_ville, int liste_ville[]){
 	for(i = 0; i < n; i++)
 	{
 		// Permet de s'assurer qu'on ne vas pas boucler sur la ville elle meme
-		if (g[num_ville][i] != 0 && liste_ville[i] != 1)
+		if ( g[num_ville][i] != 0 && liste_ville[i] != 1)
 		{
 			// Si la ville la plus proche n'a pas été définie 
 			// ou que la ville selectionné est plus proche que la ville en mémoire,
