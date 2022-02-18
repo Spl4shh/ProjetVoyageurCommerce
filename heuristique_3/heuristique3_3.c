@@ -8,6 +8,7 @@
 #include "../Programme_Fourni/permutation.c"
 #include "../Programme_Fourni/calculTemps.c"
 
+#include "../Fonction/recherche.c"
 #include "../Fonction/affichageCombine.c"
 #include "../Fonction/table.c"
 #include "../Fonction/poids.c"
