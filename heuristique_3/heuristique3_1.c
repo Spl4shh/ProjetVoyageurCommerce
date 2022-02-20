@@ -19,20 +19,17 @@
 //et timer, le minuteur pour arreter la fonction avec le temps
 void meilleurCheminRandom(Graphe g, int n, int *liste_ville, clock_t timer);
 
-//retourne le poid total du circuit choisis, 
-int get_poids_total(Graphe g, int n, int *ordre_ville);
-
-
 
 int main(int argc, char const *argv[]){
+    // Variables
     char nom[30];
     Graphe g = NULL;
     int n, m;
     int err;
-
     clock_t t1;
 	double cpu_boucle;
-
+    // END Variables
+    
     do{
 		printf("saisir le nom de fichier de donnees : ");
 		scanf("%s", nom); 
@@ -56,28 +53,15 @@ int main(int argc, char const *argv[]){
 }
 
 void meilleurCheminRandom(Graphe g, int n, int *liste_ville, clock_t timer){
-    int poids = get_poids_total(g, n, liste_ville);
+    int poids = getPoidsTotal(g, n, liste_ville);
 
     int chemin_test[n];
     copieTable(chemin_test, liste_ville, n);
 
 	while (getTempsEcoule(timer) < TIMER_LIMIT){
         permut_complete(liste_ville, n);
-        if(get_poids_total(g, n, liste_ville) > (get_poids_total(g, n, chemin_test))){
+        if(getPoidsTotal(g, n, liste_ville) > (getPoidsTotal(g, n, chemin_test))){
             copieTable(liste_ville, chemin_test, n);
         }    
     }  
-}
-
-int get_poids_total(Graphe g, int n, int *ordre_ville){
-	int somme_poids = 0;
-	int point_a, point_b;
-    
-	for (int i = 0; i < n-1; i++){
-		point_a = ordre_ville[i];
-		point_b = ordre_ville[i+1];	
-		somme_poids += g[point_a][point_b];
-	}
-
-	return somme_poids;
 }
