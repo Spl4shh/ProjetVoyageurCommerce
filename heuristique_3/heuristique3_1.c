@@ -21,26 +21,28 @@
     @param ordre_ville La table contenant l'ordre de visite des villes
     @param timer Le minuteur afin d'arreter les recherches
 */
-void meilleurCheminRandom(Graphe g, int n, int *liste_ville, clock_t timer);
+void meilleurCheminRandom(Graphe G, int n, int ordre_ville[], clock_t timer);
 
 
 int main(int argc, char const *argv[]){
     // Variables
     char nom[30];
-    Graphe g = NULL;
+    Graphe G = NULL;
     int n, m;
     int err;
     clock_t t1;
+    int *liste_ville;
     // END Variables
     
     do{
 		printf("saisir le nom de fichier de donnees : ");
 		scanf("%s", nom); 
 		while(getchar() != '\n');
-		err = lire_data(nom, &g, &n, &m);
+		err = lire_data(nom, &G, &n, &m);
 	}while(err == 0);
    
-    int liste_ville[n];
+    liste_ville = malloc(n * sizeof(int));
+   
     for (int i = 0; i < n; i++){
         liste_ville[i] = i;
     }
@@ -48,23 +50,23 @@ int main(int argc, char const *argv[]){
     t1 = clock();
 
     // Fait des recherches pendant TIMER_LIMIT
-    meilleurCheminRandom(g, n, liste_ville, t1);
+    meilleurCheminRandom(G, n, liste_ville, t1);
 
     // Affichage
     affichageTimer(t1);
-    afficheCheminPoids(g, n, liste_ville);
+    afficheCheminPoids(G, n, liste_ville);
 }
 
-void meilleurCheminRandom(Graphe g, int n, int *liste_ville, clock_t timer){
-    int poids = getPoidsTotal(g, n, liste_ville);
-
+void meilleurCheminRandom(Graphe G, int n, int ordre_ville[], clock_t timer){
     int chemin_test[n];
-    copieTable(chemin_test, liste_ville, n);
+    copieTable(chemin_test, ordre_ville, n);
 
 	while (getTempsEcoule(timer) < TIMER_LIMIT){
-        permut_complete(&liste_ville[1], n-1);
-        if(getPoidsTotal(g, n, liste_ville) > (getPoidsTotal(g, n, chemin_test))){
-            copieTable(liste_ville, chemin_test, n);
+        // permutation de toute la table sauf du premier élément
+        permut_complete(&chemin_test[1], n-1);
+        
+        if(getPoidsTotal(G, n, ordre_ville) > (getPoidsTotal(G, n, chemin_test))){
+            copieTable(ordre_ville, chemin_test, n);
         }    
     }  
 }
