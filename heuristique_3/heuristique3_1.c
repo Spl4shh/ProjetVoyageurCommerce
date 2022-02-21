@@ -14,9 +14,13 @@
 
 #define TIMER_LIMIT 15.0
 
-//créer un chemin rapide passant par tout les points, de façon aléatoire 
-//avec g le graphe, n le nombre de ville (longueur de la table qui suit), ordre_ville la table de ville que l'on veut renvoyer
-//et timer, le minuteur pour arreter la fonction avec le temps
+/*
+    Créé un chemin rapide passant par tout les points, de façon aléatoire 
+    @param g Graphe des villes et de leurs chemins avec le poids
+    @param n Le nombre de ville dans le graphe
+    @param ordre_ville La table contenant l'ordre de visite des villes
+    @param timer Le minuteur afin d'arreter les recherches
+*/
 void meilleurCheminRandom(Graphe g, int n, int *liste_ville, clock_t timer);
 
 
@@ -27,7 +31,6 @@ int main(int argc, char const *argv[]){
     int n, m;
     int err;
     clock_t t1;
-	double cpu_boucle;
     // END Variables
     
     do{
