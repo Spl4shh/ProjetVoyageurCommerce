@@ -12,35 +12,37 @@
 #include "../Fonction/table.c"
 #include "../Fonction/poids.c"
 
-#define TIMER_LIMIT 2.0
+#define TIMER_LIMIT 15.0
 
-//créer un chemin rapide passant par tout les points, de façon aléatoire 
-//avec g le graphe, n le nombre de ville (longueur de la table qui suit), ordre_ville la table de ville que l'on veut renvoyer
-//et timer, le minuteur pour arreter la fonction avec le temps
-void meilleurCheminRandom(Graphe g, int n, int *liste_ville, clock_t timer);
-
-//retourne le poid total du circuit choisis, 
-int get_poids_total(Graphe g, int n, int *ordre_ville);
-
+/*
+    Créé un chemin rapide passant par tout les points, de façon aléatoire 
+    @param g Graphe des villes et de leurs chemins avec le poids
+    @param n Le nombre de ville dans le graphe
+    @param ordre_ville La table contenant l'ordre de visite des villes
+    @param timer Le minuteur afin d'arreter les recherches
+*/
+void meilleurCheminRandom(Graphe G, int n, int ordre_ville[], clock_t timer);
 
 
 int main(int argc, char const *argv[]){
+    // Variables
     char nom[30];
-    Graphe g = NULL;
+    Graphe G = NULL;
     int n, m;
     int err;
-
     clock_t t1;
-	double cpu_boucle;
-
+    int *liste_ville;
+    // END Variables
+    
     do{
 		printf("saisir le nom de fichier de donnees : ");
 		scanf("%s", nom); 
 		while(getchar() != '\n');
-		err = lire_data(nom, &g, &n, &m);
+		err = lire_data(nom, &G, &n, &m);
 	}while(err == 0);
    
-    int liste_ville[n];
+    liste_ville = malloc(n * sizeof(int));
+   
     for (int i = 0; i < n; i++){
         liste_ville[i] = i;
     }
@@ -48,36 +50,23 @@ int main(int argc, char const *argv[]){
     t1 = clock();
 
     // Fait des recherches pendant TIMER_LIMIT
-    meilleurCheminRandom(g, n, liste_ville, t1);
+    meilleurCheminRandom(G, n, liste_ville, t1);
 
     // Affichage
     affichageTimer(t1);
-    afficheCheminPoids(g, n, liste_ville);
+    afficheCheminPoids(G, n, liste_ville);
 }
 
-void meilleurCheminRandom(Graphe g, int n, int *liste_ville, clock_t timer){
-    int poids = get_poids_total(g, n, liste_ville);
-
+void meilleurCheminRandom(Graphe G, int n, int ordre_ville[], clock_t timer){
     int chemin_test[n];
-    copieTable(chemin_test, liste_ville, n);
+    copieTable(chemin_test, ordre_ville, n);
 
 	while (getTempsEcoule(timer) < TIMER_LIMIT){
-        permut_complete(liste_ville, n);
-        if(get_poids_total(g, n, liste_ville) > (get_poids_total(g, n, chemin_test))){
-            copieTable(liste_ville, chemin_test, n);
+        // permutation de toute la table sauf du premier élément
+        permut_complete(&chemin_test[1], n-1);
+        
+        if(getPoidsTotal(G, n, ordre_ville) > (getPoidsTotal(G, n, chemin_test))){
+            copieTable(ordre_ville, chemin_test, n);
         }    
     }  
-}
-
-int get_poids_total(Graphe g, int n, int *ordre_ville){
-	int somme_poids = 0;
-	int point_a, point_b;
-    
-	for (int i = 0; i < n-1; i++){
-		point_a = ordre_ville[i];
-		point_b = ordre_ville[i+1];	
-		somme_poids += g[point_a][point_b];
-	}
-
-	return somme_poids;
 }

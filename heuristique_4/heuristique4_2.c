@@ -14,7 +14,7 @@
 #include "../Fonction/randomNumber.c"
 #include "../Fonction/affichageCombine.c"
 
-#define TIMER_LIMIT 1.0
+#define TIMER_LIMIT 60.0
 /*
 	Pour l'heuristique 4.2, on reutilise l'heucaristique 3.2 et on créé les fonctions nécéssaires
 */
@@ -101,9 +101,8 @@ int main(int argc, char const *argv[])
 
 	// Affichage resultat aprezs permutation
 	printf("\n\nAvec des permutations aleatoire :");	
-	afficheCheminPoids(G, n, ordre_ville);
-
 	affichageTimer(timer);
+	afficheCheminPoids(G, n, ordre_ville);
 
       return 0;
 }

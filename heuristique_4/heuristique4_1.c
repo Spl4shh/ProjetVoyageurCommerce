@@ -100,9 +100,8 @@ int main(int argc, char const *argv[])
 
 	// Affichage resultat aprezs permutation
 	printf("\n\nAvec des permutations aleatoire :");	
-	afficheCheminPoids(G, n, ordre_ville);
-
 	affichageTimer(timer);
+	afficheCheminPoids(G, n, ordre_ville);
 
       return 0;
 }
@@ -110,7 +109,7 @@ int main(int argc, char const *argv[])
 void permutationPoint(int point_a, int point_b, int n, int ordre_ville[], int nouveau_tableau[]){
 	copieTable(nouveau_tableau, ordre_ville, n);
 
-	if (point_a >= 0 && point_a < n-1 && point_b >= 0 && point_b < n-1 && point_a != point_b){ 
+	if (point_a >= 0 && point_a <= n-1 && point_b >= 0 && point_b <= n-1 && point_a != point_b){ 
 		int tempo;
 		
 		tempo = nouveau_tableau[point_a];
@@ -125,10 +124,10 @@ void rechercheParcoursPermutation(Graphe G, clock_t timer, int n, int ordre_vill
 	while (getTempsEcoule(timer) < TIMER_LIMIT){
 		//Choisir 2 points au hasard
 
-		int nb1 = randomNumber(0, n-2); // n-4 pour laisser la place a l'autre nombre d'etre selectionné
-		int nb2 = randomNumber(0, n-2);
-		while(nb2 <= (nb1 + 1)){
-			nb2 = randomNumber(0, n-2);
+		int nb1 = randomNumber(0, n-1); // n-4 pour laisser la place a l'autre nombre d'etre selectionné
+		int nb2 = randomNumber(0, n-1);
+		while(nb2 == nb1){
+			nb2 = randomNumber(0, n-1);
 		}
 		
 		permutationPoint(nb1, nb2, n, ordre_ville, new_ordre_ville);
@@ -141,7 +140,7 @@ void rechercheParcoursPermutation(Graphe G, clock_t timer, int n, int ordre_vill
 		printf("\nLe distance totale teste est de %4d km", getPoidsTotal(G, n, new_ordre_ville));
 		*/
 
-		if (getPoidsTotal(G, n, ordre_ville) > getPoidsTotal(G, n, new_ordre_ville)){
+		if (getPoidsTotal(G, n, ordre_ville) >= getPoidsTotal(G, n, new_ordre_ville)){
 			copieTable(ordre_ville, new_ordre_ville, n);
 			
 			/*DEBUG Affiche lorsqu'il y a un changement d'ordre de ville lors de la permutation
