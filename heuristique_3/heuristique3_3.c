@@ -58,6 +58,7 @@ int main(int argc, char const *argv[]){
 
     rechercheCheminInsertion(g, n, liste_ville, t1);
 
+    // Affichage
     affichageTimer(t1);
     afficheCheminPoids(g, n, liste_ville);
 }

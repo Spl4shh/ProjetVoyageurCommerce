@@ -96,8 +96,9 @@ int main(int argc, char const *argv[])
         free(table_test);
     } 
 
-    afficheCheminPoids(G, n, ordre_ville);
+    // Affichage
     affichageTimer(timer);
+    afficheCheminPoids(G, n, ordre_ville);
     return 0;
 }
 

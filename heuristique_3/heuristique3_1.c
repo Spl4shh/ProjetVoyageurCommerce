@@ -12,7 +12,7 @@
 #include "../Fonction/table.c"
 #include "../Fonction/poids.c"
 
-#define TIMER_LIMIT 2.0
+#define TIMER_LIMIT 15.0
 
 //créer un chemin rapide passant par tout les points, de façon aléatoire 
 //avec g le graphe, n le nombre de ville (longueur de la table qui suit), ordre_ville la table de ville que l'on veut renvoyer
@@ -59,7 +59,7 @@ void meilleurCheminRandom(Graphe g, int n, int *liste_ville, clock_t timer){
     copieTable(chemin_test, liste_ville, n);
 
 	while (getTempsEcoule(timer) < TIMER_LIMIT){
-        permut_complete(liste_ville, n);
+        permut_complete(&liste_ville[1], n-1);
         if(getPoidsTotal(g, n, liste_ville) > (getPoidsTotal(g, n, chemin_test))){
             copieTable(liste_ville, chemin_test, n);
         }    
