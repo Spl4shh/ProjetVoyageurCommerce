@@ -37,7 +37,7 @@ void croiserPoint(int point_a, int point_b, int n, int ordre_ville[], int nouvea
 	Effectue des permutations aleatoires et compare son poids avec le poids du chemion actuel.
 	Effectue des permutations pendant TIMER_LIMIT.
 */
-void rechercheParcoursCroisement(Graphe G, clock_t timer, int n, int ordre_ville[], int new_ordre_ville[]);
+void rechercheParcoursCroisement(Graphe G, clock_t timer, int n, int ordre_ville[]);
 
 int main(int argc, char const *argv[])
 {
@@ -74,30 +74,18 @@ int main(int argc, char const *argv[])
 	//Declenche l'horloge
 	timer = clock();
 
-	for(int i = 0; i < n; i++)
-	{	
-		ville_suivante = rechercheVoisinProche(G, n, ville_actuelle, liste_ville);
-		
-		//On rentre ici seulement si l'on a pas exploré toutes les villes
-		if (ville_suivante != -1)
-		{
-			ville_actuelle = ville_suivante;
-			liste_ville[ville_actuelle] = 1;
-			ordre_ville[i+1] = ville_actuelle;;
-		}
-	}
+	
+	// H3.1
+	// H3.2
+	// H3.3
 	
 
 	// Affichage l'ordre selon le voisin le plus proche
 	printf("\nAvec la recherche du plus proche voisin :");	
 	afficheCheminPoids(G, n, ordre_ville);
 
-	// Definition du nouveau tableau pour faire les tests
-	int *new_ordre_ville = NULL;
-	new_ordre_ville = malloc(n * sizeof(int));
-
 	//Fait des recherches pendant TIMER_LIMIT secondes
-	rechercheParcoursCroisement(G, timer, n, ordre_ville, new_ordre_ville);
+	rechercheParcoursCroisement(G, timer, n, ordre_ville);
 
 	// Affichage resultat aprezs permutation
 	printf("\n\nAvec des permutations aleatoire :");	
@@ -123,7 +111,10 @@ void croiserPoint(int point_a, int point_b, int n, int ordre_ville[], int nouvea
 	}	
 }
 
-void rechercheParcoursCroisement(Graphe G, clock_t timer, int n, int ordre_ville[], int new_ordre_ville[]){
+void rechercheParcoursCroisement(Graphe G, clock_t timer, int n, int ordre_ville[]){
+	int *new_ordre_ville = NULL;
+	new_ordre_ville = malloc(n * sizeof(int));
+	
 	while (getTempsEcoule(timer) < TIMER_LIMIT){
 		//Choisir 2 points au hasard
 

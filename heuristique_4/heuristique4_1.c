@@ -14,6 +14,11 @@
 #include "../Fonction/randomNumber.c"
 #include "../Fonction/affichageCombine.c"
 
+#include "../heuristique_3/heuristique3_1.c"
+#include "../heuristique_3/heuristique3_2.c"
+#include "../heuristique_3/heuristique3_3_1.c"
+#include "../heuristique_3/heuristique3_3_2.c"
+
 #define TIMER_LIMIT 1.0
 /*
 	Pour l'heuristique 4.1, on reutilise l'heucaristique 3.2 et on créé les fonctions nécéssaires
@@ -24,8 +29,8 @@
    Conditions : 
 	point_a >= 0 
 	point_b >= 0 
-	point_a < n-1
-	point_b < n-1
+	point_a < n
+	point_b < n
       point_a != point_b            
    Avec n la taille du tableau
 */
@@ -36,7 +41,7 @@ void permutationPoint(int point_a, int point_b, int n, int ordre_ville[], int no
 	Effectue des permutations aleatoires et compare son poids avec le poids du chemion actuel.
 	Effectue des permutations pendant TIMER_LIMIT.
 */
-void rechercheParcoursPermutation(Graphe G, clock_t timer, int n, int ordre_ville[], int new_ordre_ville[]);
+void rechercheParcoursPermutation(Graphe G, int n, int ordre_ville[], clock_t timer);
 
 int main(int argc, char const *argv[])
 {
@@ -73,30 +78,17 @@ int main(int argc, char const *argv[])
 	//Declenche l'horloge
 	timer = clock();
 
-	for(int i = 0; i < n; i++)
-	{	
-		ville_suivante = rechercheVoisinProche(G, n, ville_actuelle, liste_ville);
-		
-		//On rentre ici seulement si l'on a pas exploré toutes les villes
-		if (ville_suivante != -1)
-		{
-			ville_actuelle = ville_suivante;
-			liste_ville[ville_actuelle] = 1;
-			ordre_ville[i+1] = ville_actuelle;;
-		}
-	}
-	
+	rechercheCheminVoisinPlusProche(G, n, ordre_ville);
+	meilleurCheminRandom(G, n, ordre_ville, timer);
+	rechercheCheminInsertion(G, n, ordre_ville, timer);
+	assemblageAvantageux(G, n, ordre_ville);
 
 	// Affichage l'ordre selon le voisin le plus proche
 	printf("\nAvec la recherche du plus proche voisin :");	
 	afficheCheminPoids(G, n, ordre_ville);
 
-	// Definition du nouveau tableau pour faire les tests
-	int *new_ordre_ville = NULL;
-	new_ordre_ville = malloc(n * sizeof(int));
-
 	//Fait des recherches pendant TIMER_LIMIT secondes
-	rechercheParcoursPermutation(G, timer, n, ordre_ville, new_ordre_ville);
+	rechercheParcoursPermutation(G, n, ordre_ville, timer);
 
 	// Affichage resultat aprezs permutation
 	printf("\n\nAvec des permutations aleatoire :");	
@@ -109,7 +101,7 @@ int main(int argc, char const *argv[])
 void permutationPoint(int point_a, int point_b, int n, int ordre_ville[], int nouveau_tableau[]){
 	copieTable(nouveau_tableau, ordre_ville, n);
 
-	if (point_a >= 0 && point_a <= n-1 && point_b >= 0 && point_b <= n-1 && point_a != point_b){ 
+	if (point_a >= 0 && point_a < n && point_b >= 0 && point_b < n && point_a != point_b){ 
 		int tempo;
 		
 		tempo = nouveau_tableau[point_a];
@@ -120,8 +112,17 @@ void permutationPoint(int point_a, int point_b, int n, int ordre_ville[], int no
 	}	
 }
 
-void rechercheParcoursPermutation(Graphe G, clock_t timer, int n, int ordre_ville[], int new_ordre_ville[]){
-	while (getTempsEcoule(timer) < TIMER_LIMIT){
+void rechercheParcoursPermutation(Graphe G, int n, int ordre_ville[], clock_t timer){
+	int **listePermutation = NULL;
+	listePermutation = malloc(n*n*sizeof(int));
+
+	int *new_ordre_ville = NULL;
+	new_ordre_ville = malloc(n * sizeof(int));
+
+	int i = 0, j = 0;
+	
+	// On peut s'arreter a i = n car cela veux dire qu'on auras tout parcouru
+	while (getTempsEcoule(timer) < TIMER_LIMIT || (i != n)){
 		//Choisir 2 points au hasard
 
 		int nb1 = randomNumber(0, n-1); // n-4 pour laisser la place a l'autre nombre d'etre selectionné
@@ -129,7 +130,7 @@ void rechercheParcoursPermutation(Graphe G, clock_t timer, int n, int ordre_vill
 		while(nb2 == nb1){
 			nb2 = randomNumber(0, n-1);
 		}
-		
+
 		permutationPoint(nb1, nb2, n, ordre_ville, new_ordre_ville);
 		
 		/* DEBUG  Affiche chaque ordre de visite testé lors des permutations
@@ -150,6 +151,14 @@ void rechercheParcoursPermutation(Graphe G, clock_t timer, int n, int ordre_vill
 			}
 			printf("\nLe distance retenue est de %4d km", getPoidsTotal(G, n, ordre_ville));
 			*/
+		}
+
+		// Modification de la valeur des points
+		j++;
+
+		if (j == n){
+			j = 0;
+			i++;
 		}
 	}
 }
