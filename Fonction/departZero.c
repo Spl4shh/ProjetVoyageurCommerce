@@ -1,7 +1,7 @@
-#ifndef DEPARTZERO_H
-#define DEPARTZERO_H
+#ifndef DEPARTPOINT_H
+#define DEPARTPOINT_H
 
-void demarrerZero(int *table, int n, int r){
+void demarrerPoint(int table[], int n, int r){
     int save;
     int c = 0;
 
