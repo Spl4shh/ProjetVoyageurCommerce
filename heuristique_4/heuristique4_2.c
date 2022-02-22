@@ -61,9 +61,9 @@ int main(int argc, char const *argv[])
 
 
 	// Decommenter la version que l'on veux tester
-	//rechercheCheminVoisinPlusProche(G, n, ordre_ville);
 	//meilleurCheminRandom(G, n, ordre_ville, timer, TIMER_LIMIT);
-	rechercheCheminInsertion(G, n, ordre_ville, timer, TIMER_LIMIT);
+	rechercheCheminVoisinPlusProche(G, n, ordre_ville);
+	//rechercheCheminInsertion(G, n, ordre_ville, timer, TIMER_LIMIT);
 	//assemblageAvantageux(G, n, ordre_ville);
 
 	demarrerPoint(ordre_ville, n, 0);
