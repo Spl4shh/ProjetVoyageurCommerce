@@ -14,7 +14,6 @@
 
 #include "Fonction/heuristique3_2.c"
 
-
 int main(int argc, char const *argv[])
 {
       //Variables

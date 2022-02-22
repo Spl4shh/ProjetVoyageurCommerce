@@ -3,6 +3,10 @@
 
     #include <time.h>
     #include "../../Programme_Fourni/graphe.h"
+    #include "../../Programme_Fourni/permutation.c"
+    #include "../../Programme_Fourni/calculTemps.c"
+    #include "../../Fonction/poids.c"
+    #include "../../Fonction/table.c"
     #include "heuristique3_1.h"
 
     void meilleurCheminRandom(Graphe G, int n, int ordre_ville[], clock_t timer, int Timer_Limit){

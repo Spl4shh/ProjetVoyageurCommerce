@@ -2,6 +2,7 @@
 	#define AFFICHAGECOMBINE_C
 
 	#include "../Programme_Fourni/graphe.h"
+	#include "../Programme_Fourni/calculTemps.c"
 	#include "../Fonction/poids.c"
 
       // Affichage du chemin en parametre ainsi que son poids total

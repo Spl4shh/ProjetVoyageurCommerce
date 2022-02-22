@@ -6,7 +6,6 @@
 #include "../Programme_Fourni/affichage.c"
 #include "../Programme_Fourni/lectureFichier.c"
 #include "../Programme_Fourni/permutation.c"
-#include "../Programme_Fourni/calculTemps.c"
 
 #include "../Fonction/affichageCombine.c"
 #include "../Fonction/table.c"
