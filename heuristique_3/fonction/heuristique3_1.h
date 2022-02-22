@@ -9,7 +9,8 @@
             @param n Le nombre de ville dans le graphe
             @param ordre_ville La table contenant l'ordre de visite des villes
             @param timer Le minuteur afin d'arreter les recherches
+            @param TIMER_LIMIT la limite de temps pendant laquelle on fait des recherches
       */
-      void meilleurCheminRandom(Graphe G, int n, int ordre_ville[], clock_t timer);
+      void meilleurCheminRandom(Graphe G, int n, int ordre_ville[], clock_t timer, int TIMERR_LIMIT);
 
 #endif
