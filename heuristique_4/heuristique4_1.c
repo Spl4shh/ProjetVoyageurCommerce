@@ -12,7 +12,7 @@
 #include "../Fonction/table.c"
 #include "../Fonction/recherche.c"
 #include "../Fonction/randomNumber.c"
-#include "../Fonction/departZero.c"
+#include "../Fonction/departPoint.c"
 #include "../Fonction/affichageCombine.c"
 
 #include "../heuristique_3/Fonction/heuristique3_1.c"
