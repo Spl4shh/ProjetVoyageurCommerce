@@ -12,7 +12,7 @@
 #include "../Fonction/recherche.c"
 #include "../Fonction/affichageCombine.c"
 
-#include "fonction/heuristique3_2.c"
+#include "Fonction/heuristique3_2.c"
 
 
 int main(int argc, char const *argv[])

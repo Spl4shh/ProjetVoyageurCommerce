@@ -12,7 +12,7 @@
 #include "../Fonction/table.c"
 #include "../Fonction/poids.c"
 
-#include "fonction/heuristique3_1.c"
+#include "Fonction/heuristique3_1.c"
 
 #define TIMER_LIMIT 15.0
 
