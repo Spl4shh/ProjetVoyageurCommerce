@@ -50,13 +50,13 @@ int rnd(int a, int b){
 }
 
 void permut_complete(int * t, int taille){
-	int i, j, yam;
+	int i, j, tempo;
 
 	for(i = 0; i < taille-1; i++){
 		j = rnd(i, taille-1);
-		yam = t[i];
+		tempo = t[i];
 		t[i] = t[j];
-		t[j] = yam;
+		t[j] = tempo;
 	}
 }
 

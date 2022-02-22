@@ -34,6 +34,8 @@ int main(int argc, char const *argv[]){
     int *liste_ville;
     // END Variables
     
+    srand((unsigned int)time(NULL));
+    
     do{
 		printf("saisir le nom de fichier de donnees : ");
 		scanf("%s", nom); 
