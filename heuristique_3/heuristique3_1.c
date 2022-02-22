@@ -31,7 +31,7 @@ int main(int argc, char const *argv[]){
     int n, m;
     int err;
     clock_t t1;
-    int *liste_ville;
+    int *ordre_ville;
     // END Variables
     
     srand((unsigned int)time(NULL));
@@ -43,20 +43,21 @@ int main(int argc, char const *argv[]){
 		err = lire_data(nom, &G, &n, &m);
 	}while(err == 0);
    
-    liste_ville = malloc(n * sizeof(int));
+    ordre_ville = malloc(n * sizeof(int));
    
+    // Ranger les villes dans l'ordre
     for (int i = 0; i < n; i++){
-        liste_ville[i] = i;
+        ordre_ville[i] = i;
     }
    
     t1 = clock();
 
     // Fait des recherches pendant TIMER_LIMIT
-    meilleurCheminRandom(G, n, liste_ville, t1);
+    meilleurCheminRandom(G, n, ordre_ville, t1);
 
     // Affichage
     affichageTimer(t1);
-    afficheCheminPoids(G, n, liste_ville);
+    afficheCheminPoids(G, n, ordre_ville);
 }
 
 void meilleurCheminRandom(Graphe G, int n, int ordre_ville[], clock_t timer){
