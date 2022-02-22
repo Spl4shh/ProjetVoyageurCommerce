@@ -36,11 +36,6 @@ int main(int argc, char const *argv[]){
     // Creer la table qui va contenir le chemin final
     int *ordre_ville;
     ordre_ville = malloc(n * sizeof(int));
-
-    // Ranger les villes dans l'ordre
-    for (int i = 0; i < n; i++){
-        ordre_ville[i] = i;
-    }
    
     t1 = clock();
 

@@ -4,7 +4,10 @@
 	#include "../../Programme_Fourni/graphe.h"
 	#include <stdio.h>
 	#include <time.h>
+
 	#include "heuristique3_3_1.h"
+	#include "../../Fonction/table.c"
+	#include "../../Fonction/poids.c"
 
       // Décale les élément d'une table vers la gauche
 	void decalageVersGauche(int *table, int n){
@@ -26,13 +29,13 @@
 	void cheminParInsertion(Graphe g, int n, int ordre_ville[]){
 		int chemin_test[n];
 		copieTable(chemin_test, ordre_ville, n);   // Initilisation de la table de test
-		
+
 		for(int checked = 2; checked < n-1; checked++){     // Pour chaque ville ajoutée
 			for(int j = 0; j < checked; j++){               // Pour chaque position de ville testée
 				insererElementDroite(1, checked-j, chemin_test);
 
 				if(getPoidsTotal(g, checked, chemin_test) < getPoidsTotal(g, checked, ordre_ville)){
-				copieTable(ordre_ville, chemin_test, n);    // On sauvegarde la meilleure performance
+					copieTable(ordre_ville, chemin_test, n);    // On sauvegarde la meilleure performance
 				}
 			}
 		}
@@ -41,6 +44,10 @@
       // Appel cheminParInsertion en boucle pendant Timer_Limit avec des listes différentes, variant aléatoirement
 	void rechercheCheminInsertion(Graphe g, int n, int ordre_ville[], clock_t timer, int Timer_Limit){
 		int chemin_test[n];
+		for (int i = 0; i < n; i++){
+			ordre_ville[i] = i;
+		}
+
 		copieTable(chemin_test, ordre_ville, n);    // Initilisation de la table de test
 		
 		while (getTempsEcoule(timer) < Timer_Limit){    

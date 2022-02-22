@@ -35,10 +35,6 @@ int main(int argc, char const *argv[]){
    
     int *ordre_ville = NULL;
 	ordre_ville = malloc(n * sizeof(int)); 
-
-    for (int i = 0; i < n; i++){
-        ordre_ville[i] = i;
-    }
    
     t1 = clock();
     rechercheCheminInsertion(g, n, ordre_ville, t1, TIMER_LIMIT);

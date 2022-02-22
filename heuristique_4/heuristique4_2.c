@@ -22,7 +22,7 @@
 #include "../heuristique_3/Fonction/heuristique3_3_1.c"
 #include "../heuristique_3/Fonction/heuristique3_3_2.c"
 
-#define TIMER_LIMIT 15.0
+#define TIMER_LIMIT 1.0
 
 int main(int argc, char const *argv[])
 {
@@ -59,13 +59,13 @@ int main(int argc, char const *argv[])
 	//Declenche l'horloge
 	timer = clock();
 
-	
+
 	// Decommenter la version que l'on veux tester
-	rechercheCheminVoisinPlusProche(G, n, ordre_ville);
-	//meilleurCheminRandom(G, n, ordre_ville, timer);
-	//rechercheCheminInsertion(G, n, ordre_ville, timer);
+	//rechercheCheminVoisinPlusProche(G, n, ordre_ville);
+	//meilleurCheminRandom(G, n, ordre_ville, timer, TIMER_LIMIT);
+	rechercheCheminInsertion(G, n, ordre_ville, timer, TIMER_LIMIT);
 	//assemblageAvantageux(G, n, ordre_ville);
-	
+
 	demarrerPoint(ordre_ville, n, 0);
 
 	// Affichage l'ordre selon le voisin le plus proche
@@ -76,7 +76,7 @@ int main(int argc, char const *argv[])
 	rechercheParcoursCroisement(G, timer, n, ordre_ville, TIMER_LIMIT);
 
 	// Affichage resultat aprezs permutation
-	printf("\n\nAvec des permutations aleatoire :");	
+	printf("\n\nApres les (de)croisement d'arc :");	
 	affichageTimer(timer);
 	afficheCheminPoids(G, n, ordre_ville);
 

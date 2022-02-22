@@ -11,7 +11,7 @@
     void croiserPoint(int point_a, int point_b, int n, int ordre_ville[], int nouveau_tableau[]){
         copieTable(nouveau_tableau, ordre_ville, n);
 
-        if (point_a >= 0 && point_a < n-1 && point_b < n-1 && point_a < point_b && (point_b - point_a) > 1){ 
+        if (point_a >= 0 && point_a < n-1 && point_b < n-1 && point_a < point_b){ 
             int tempo;
             
             tempo = ordre_ville[point_a + 1];
@@ -28,17 +28,18 @@
         int *new_ordre_ville = NULL;
         new_ordre_ville = malloc(n * sizeof(int));
         
-        while (getTempsEcoule(timer) < Timer_Limit){
-            //Choisir 2 points au hasard
+        int i = 0, j = 1; 
 
-            int nb1 = randomNumber(0, n-4); // n-4 pour laisser la place a l'autre nombre d'etre selectionné
-            int nb2 = randomNumber(0, n-2);
-            while(nb2 <= (nb1 + 1)){
-                nb2 = randomNumber(0, n-2);
+        while (getTempsEcoule(timer) < Timer_Limit && i < (n-4)){
+            
+            if (j == (n-1)){
+                i++;
+                j = i+1;
             }
             
-            croiserPoint(nb1, nb2, n, ordre_ville, new_ordre_ville);
             
+            croiserPoint(i, j, n, ordre_ville, new_ordre_ville);
+            printf("Here / ");
             /* DEBUG  Affiche chaque ordre de visite testé lors des permutations
             printf("\nL'ordre de visite teste est : ");
             for (int i = 0; i < n; i++){
@@ -58,6 +59,7 @@
                 printf("\nLe distance retenue est de %4d km", getPoidsTotal(G, n, ordre_ville));
                 */
             }
+            j++;
         }
     }
 
