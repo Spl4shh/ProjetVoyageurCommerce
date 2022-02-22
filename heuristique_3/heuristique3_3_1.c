@@ -23,7 +23,7 @@ void decalageVersGauche(int *table, int n);
 void insererElementDroite(int decalage, int rangDep, int *liste);
 
 //appel cheminParInsertion en boucle pendant TIMER_LIMIT avec des listes différentes, variant aléatoirement
-void rechercheCheminInsertion(Graphe g, int n, int *liste_ville, clock_t timer);
+void rechercheCheminInsertion(Graphe g, int n, int ordre_ville[], clock_t timer);
 
 //cherche un chemin rapide en inserant de nouvelle ville une par une, en vérifiant quelle insertion est la plus rapide
 void cheminParInsertion(Graphe g, int n, int *liste_ville);
@@ -64,18 +64,18 @@ int main(int argc, char const *argv[]){
 }
 
 
-void rechercheCheminInsertion(Graphe g, int n, int *liste_ville, clock_t timer){
+void rechercheCheminInsertion(Graphe g, int n, int ordre_ville[], clock_t timer){
     
     int chemin_test[n];
-    copieTable(chemin_test, liste_ville, n);//initilisation de la table de test
+    copieTable(chemin_test, ordre_ville, n);//initilisation de la table de test
     
 
     while (getTempsEcoule(timer) < TIMER_LIMIT){    
         
         cheminParInsertion(g, n, chemin_test);  //création du résultat de la seed (= trie de la table donnée aléarement)
 
-        if(getPoidsTotal(g, n, liste_ville) > (getPoidsTotal(g, n, chemin_test))){
-            copieTable(liste_ville, chemin_test, n);            //on sauvegarde la meilleure perf
+        if(getPoidsTotal(g, n, ordre_ville) > (getPoidsTotal(g, n, chemin_test))){
+            copieTable(ordre_ville, chemin_test, n);            //on sauvegarde la meilleure perf
         } 
         permut_complete(chemin_test, n);        //nouvelle seed
         
@@ -84,17 +84,17 @@ void rechercheCheminInsertion(Graphe g, int n, int *liste_ville, clock_t timer){
     
 
 
-void cheminParInsertion(Graphe g, int n, int *liste_ville){
+void cheminParInsertion(Graphe g, int n, int ordre_ville[]){
   
     int chemin_test[n];
-    copieTable(chemin_test, liste_ville, n);   //initilisation de la table de test
+    copieTable(chemin_test, ordre_ville, n);   //initilisation de la table de test
     
         for(int checked = 2; checked < n-1; checked++){     //pour chaque ville ajoutée
             for(int j = 0; j < checked; j++){               //pour chaque position de ville testée
                 insererElementDroite(1, checked-j, chemin_test);
 
-                if(getPoidsTotal(g, checked, chemin_test) < getPoidsTotal(g, checked, liste_ville)){
-                    copieTable(liste_ville, chemin_test, n);    //on sauvegarde la meilleure performance
+                if(getPoidsTotal(g, checked, chemin_test) < getPoidsTotal(g, checked, ordre_ville)){
+                    copieTable(ordre_ville, chemin_test, n);    //on sauvegarde la meilleure performance
                 }
             }
          

@@ -20,7 +20,7 @@
     Par exemple si on a ACB pour D, on va tester ADCB, ACDB, ACBD et on garde celui avec le poids le plus faible
     Peut etre assimilié a un plus proche voisin "optimisé"
 */
-void assemblageAvantageux(Graphe G, int size, int liste_ville[], int ordre_ville[]);
+void assemblageAvantageux(Graphe G, int n, int ordre_ville[]);
 
 int main(int argc, char const *argv[])
 {
@@ -46,55 +46,16 @@ int main(int argc, char const *argv[])
 	Liste_ville sert a verifier les villes dans lesquelles on est deja passé
 	ordre_ville sert a sauvegarder l'ordre dans lequel on est passé
 	*/
-	int *liste_ville = NULL, *ordre_ville = NULL;
+	int *ordre_ville = NULL;
 
-	liste_ville = malloc(n * sizeof(int));
 	ordre_ville = malloc(n * sizeof(int));
 
-	liste_ville[ville_actuelle] = 1;
 	ordre_ville[0] = ville_actuelle;
 
 	// Declenche l'horloge
 	timer = clock();
 
-    // Ici i correspondra à la valeur que l'on affecteras, on va donc devoir travailler avec i+1 quand on parlera de taille d'element
-    for (int i = 0; i < n; i++)
-    {
-        int firstTest = 1;
-
-        int * table_insertion = NULL;
-        table_insertion = malloc((i+1) * sizeof(int));
-        
-        int * table_test = NULL;
-        table_test = malloc((i+1) * sizeof(int));
-
-        copieTable(table_insertion, ordre_ville, i+1);
-
-        if (liste_ville[i] != 1){ // Si l'on a pas encore traité la ville
-            for (int j = 1; j < i+1; j++){
-                copieTable(table_test, ordre_ville, i+1);
-
-                //Decalage
-                for (int k = i; k > j /*Position de la valeur*/; k--){
-                    table_test[k] = table_test[k-1];
-                }
-                table_test[j] = i;
-                
-                if (firstTest){
-                    copieTable(table_insertion, table_test, i+1);                  
-                    firstTest = 0; 
-                }else{
-                    if (getPoidsTotal(G, i, table_insertion) > getPoidsTotal(G, i, table_test)){
-                        copieTable(table_insertion, table_test, i+1);
-                    }  
-                }
-            }    
-        }
-        copieTable(ordre_ville, table_insertion, i+1); 
-
-        free(table_insertion);
-        free(table_test);
-    } 
+    assemblageAvantageux(G, n, ordre_ville);
 
     // Affichage
     affichageTimer(timer);
@@ -103,9 +64,14 @@ int main(int argc, char const *argv[])
 }
 
 //Peut etre essayer d'eneleer table_insertion
-void assemblageAvantageux(Graphe G, int size, int liste_ville[], int ordre_ville[]){
+void assemblageAvantageux(Graphe G, int n, int ordre_ville[]){
+    int *liste_ville = NULL;
+    liste_ville = malloc(n * sizeof(int));
+
+	liste_ville[ordre_ville[0]] = 1;
+
     // Ici i correspondra à la valeur que l'on affecteras, on va donc devoir travailler avec i+1 quand on parlera de taille d'element
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < n; i++)
     {
         int firstTest = 1;
 
