@@ -12,17 +12,9 @@
 #include "../Fonction/table.c"
 #include "../Fonction/poids.c"
 
+#include "fonction/heuristique3_1.c"
+
 #define TIMER_LIMIT 15.0
-
-/*
-    Créé un chemin rapide passant par tout les points, de façon aléatoire 
-    @param g Graphe des villes et de leurs chemins avec le poids
-    @param n Le nombre de ville dans le graphe
-    @param ordre_ville La table contenant l'ordre de visite des villes
-    @param timer Le minuteur afin d'arreter les recherches
-*/
-void meilleurCheminRandom(Graphe G, int n, int ordre_ville[], clock_t timer);
-
 
 int main(int argc, char const *argv[]){
     // Variables
@@ -31,7 +23,6 @@ int main(int argc, char const *argv[]){
     int n, m;
     int err;
     clock_t t1;
-    int *ordre_ville;
     // END Variables
     
     srand((unsigned int)time(NULL));
@@ -43,8 +34,10 @@ int main(int argc, char const *argv[]){
 		err = lire_data(nom, &G, &n, &m);
 	}while(err == 0);
    
+    // Creer la table qui va contenir le chemin final
+    int *ordre_ville;
     ordre_ville = malloc(n * sizeof(int));
-   
+
     // Ranger les villes dans l'ordre
     for (int i = 0; i < n; i++){
         ordre_ville[i] = i;
@@ -53,23 +46,9 @@ int main(int argc, char const *argv[]){
     t1 = clock();
 
     // Fait des recherches pendant TIMER_LIMIT
-    meilleurCheminRandom(G, n, ordre_ville, t1);
+    meilleurCheminRandom(G, n, ordre_ville, t1, TIMER_LIMIT);
 
     // Affichage
     affichageTimer(t1);
     afficheCheminPoids(G, n, ordre_ville);
-}
-
-void meilleurCheminRandom(Graphe G, int n, int ordre_ville[], clock_t timer){
-    int chemin_test[n];
-    copieTable(chemin_test, ordre_ville, n);
-
-	while (getTempsEcoule(timer) < TIMER_LIMIT){
-        // permutation de toute la table sauf du premier élément
-        permut_complete(&chemin_test[1], n-1);
-        
-        if(getPoidsTotal(G, n, ordre_ville) > (getPoidsTotal(G, n, chemin_test))){
-            copieTable(ordre_ville, chemin_test, n);
-        }    
-    }  
 }
