@@ -15,6 +15,11 @@
 #include "../Fonction/departZero.c"
 #include "../Fonction/affichageCombine.c"
 
+#include "../heuristique_3/Fonction/heuristique3_1.c"
+#include "../heuristique_3/Fonction/heuristique3_2.c"
+#include "../heuristique_3/Fonction/heuristique3_3_1.c"
+#include "../heuristique_3/Fonction/heuristique3_3_2.c"
+
 #include "Fonction/heuristique4_1.c"
 
 #define TIMER_LIMIT 1.0
