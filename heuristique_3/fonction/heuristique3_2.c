@@ -3,6 +3,7 @@
 
 	#include "../../Programme_Fourni/graphe.h"
 	#include <stdio.h>
+	#include "heuristique3_2.h"
 
 	void rechercheCheminVoisinPlusProche(Graphe G, int n, int ordre_ville[]){
 		// Variables

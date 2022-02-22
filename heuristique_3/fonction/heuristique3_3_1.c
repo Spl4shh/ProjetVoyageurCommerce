@@ -4,6 +4,7 @@
 	#include "../../Programme_Fourni/graphe.h"
 	#include <stdio.h>
 	#include <time.h>
+	#include "heuristique3_3_1.h"
 
       // Décale les élément d'une table vers la gauche
 	void decalageVersGauche(int *table, int n){
