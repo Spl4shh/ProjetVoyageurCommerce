@@ -69,7 +69,7 @@ int main(int argc, char const *argv[])
 	demarrerPoint(ordre_ville, n, 0);
 
 	// Affichage l'ordre selon le voisin le plus proche
-	printf("\nAvec la recherche du plus proche voisin :");	
+	printf("\nAvec la recherche de depart :");	
 	afficheCheminPoids(G, n, ordre_ville);
 
 	//Fait des recherches pendant TIMER_LIMIT secondes
