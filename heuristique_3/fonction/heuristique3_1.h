@@ -1,5 +1,5 @@
-#ifndef HEURISTIQUE3_1_C
-      #define HEURISTIQUE3_1_C
+#ifndef HEURISTIQUE3_1_H
+      #define HEURISTIQUE3_1_H
       #include <time.h>
       #include "../../Programme_Fourni/graphe.h"
 

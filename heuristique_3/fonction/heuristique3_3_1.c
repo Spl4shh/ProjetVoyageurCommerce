@@ -38,12 +38,12 @@
 		}
 	}
 
-      // Appel cheminParInsertion en boucle pendant TIMER_LIMIT avec des listes différentes, variant aléatoirement
-	void rechercheCheminInsertion(Graphe g, int n, int ordre_ville[], clock_t timer, int TIMER_LIMIT){
+      // Appel cheminParInsertion en boucle pendant Timer_Limit avec des listes différentes, variant aléatoirement
+	void rechercheCheminInsertion(Graphe g, int n, int ordre_ville[], clock_t timer, int Timer_Limit){
 		int chemin_test[n];
 		copieTable(chemin_test, ordre_ville, n);    // Initilisation de la table de test
 		
-		while (getTempsEcoule(timer) < TIMER_LIMIT){    
+		while (getTempsEcoule(timer) < Timer_Limit){    
 			cheminParInsertion(g, n, chemin_test);  // Création du résultat de la seed (= trie de la table donnée aléarement)
 
 			if(getPoidsTotal(g, n, ordre_ville) > (getPoidsTotal(g, n, chemin_test))){
