@@ -90,21 +90,3 @@ int lireNbrIteration(){
 		}while(err == 0);
 	}
 #endif
-
-
-
-/*test*/
-int main(int argc, char const *argv[]){
-    // Variables
-    char nom[30];
-    Graphe G = NULL;
-    int n, m;
-    int err;
-    //clock_t t1;
-    // END Variables
-    
-
-    
-	lireFichier(nom, &G, &n, &m);
-   
-}
