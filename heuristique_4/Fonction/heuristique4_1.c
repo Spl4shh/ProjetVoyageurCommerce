@@ -23,9 +23,6 @@
     }
 
     void rechercheParcoursPermutation(Graphe G, int n, int ordre_ville[], clock_t timer, int Timer_Limit){
-        int **listePermutation = NULL;
-        listePermutation = malloc(n*n*sizeof(int));
-
         int *new_ordre_ville = NULL;
         new_ordre_ville = malloc(n * sizeof(int));
 
@@ -67,8 +64,8 @@
 
             // Changement de point de base
             if (j == n){
-                j = 0;
                 i++;
+                j = i+1;
             }
         }
     }
