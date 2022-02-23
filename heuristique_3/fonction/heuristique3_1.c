@@ -20,7 +20,7 @@
 
         while (getTempsEcoule(timer) < Timer_Limit){
             // Permutation de toute la table sauf du premier élément
-            permut_complete(&chemin_test[1], n-1);
+            permut_complete(&chemin_test[0], n-1);
             if(getPoidsTotal(G, n, ordre_ville) > (getPoidsTotal(G, n, chemin_test))){
                 copieTable(ordre_ville, chemin_test, n);
             }    
