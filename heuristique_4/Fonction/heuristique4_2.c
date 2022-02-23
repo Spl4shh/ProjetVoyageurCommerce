@@ -30,7 +30,7 @@
         
         int i = 0, j = 1; 
 
-        while (getTempsEcoule(timer) < Timer_Limit && i < (n-4)){
+        while (getTempsEcoule(timer) < Timer_Limit && i < (n-3)){
             
             if (j == (n-1)){
                 i++;

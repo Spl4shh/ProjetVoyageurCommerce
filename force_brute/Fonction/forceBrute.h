@@ -15,6 +15,6 @@
             Utilise une methode permutation en ordre lexicographique
             Afin de retrouver toutes les possibilitees d'ordre unique
       */
-      void bruteForce(Graphe G, int n, int ordre_ville[], clock_t timer, int Timer_Limit);
+      void bruteForce(Graphe G, int n, int ordre_ville[]);
     
 #endif

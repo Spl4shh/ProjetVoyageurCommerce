@@ -68,15 +68,17 @@ int main(int argc, char const *argv[])
 
 	demarrerPoint(ordre_ville, n, 0);
 
+	/*
 	// Affichage l'ordre selon le voisin le plus proche
 	printf("\nAvec la recherche de depart :");	
 	afficheCheminPoids(G, n, ordre_ville);
+	*/
 
 	//Fait des recherches pendant TIMER_LIMIT secondes
 	rechercheParcoursCroisement(G, timer, n, ordre_ville, TIMER_LIMIT);
 
 	// Affichage resultat aprezs permutation
-	printf("\n\nApres les (de)croisement d'arc :");	
+	printf("Apres les (de)croisement d'arc :");	
 	affichageTimer(timer);
 	afficheCheminPoids(G, n, ordre_ville);
 

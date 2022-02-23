@@ -76,8 +76,11 @@
         }
     }
 
-    void bruteForce(Graphe G, int n, int ordre_ville[], clock_t timer, int Timer_Limit){
+    void bruteForce(Graphe G, int n, int ordre_ville[]){
         int chemin_test[n];
+        for (int i = 0; i < n; i++){
+            ordre_ville[i] = i;
+        }
         copieTable(chemin_test, ordre_ville, n);
         int fact = 1;
         
@@ -85,13 +88,11 @@
             fact = fact * j;
         }
     
-        while(timer < Timer_Limit){
-            for (int i = 0; i < fact; i++){
+        for (int i = 0; i < fact; i++){
             brutePermut(chemin_test, n);
 
             if (getPoidsTotal(G, n, ordre_ville) > getPoidsTotal(G, n, chemin_test)){
                 copieTable(ordre_ville, chemin_test, n);
-            }
             }
         }
     }

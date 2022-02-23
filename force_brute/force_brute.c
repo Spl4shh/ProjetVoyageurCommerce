@@ -14,8 +14,6 @@
 
 #include "./Fonction/forceBrute.c"
 
-#define TIMER_LIMIT 1800.0
-
 int main(int argc, char const *argv[]){
   // Variables
   char nom[30];
@@ -35,14 +33,10 @@ int main(int argc, char const *argv[]){
    
   liste_ville = malloc(n * sizeof(int));
   
-  for (int i = 0; i < n; i++){
-    liste_ville[i] = i;
-  }
-  
   t1 = clock();
 
   // Fait des recherches pendant TIMER_LIMIT
-  bruteForce(G, n, liste_ville, t1, TIMER_LIMIT);
+  bruteForce(G, n, liste_ville);
 
   // Affichage
   affichageTimer(t1);
