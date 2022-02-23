@@ -22,7 +22,7 @@
 
 #include "Fonction/heuristique4_1.c"
 
-#define TIMER_LIMIT 1.0
+#define TIMER_LIMIT 5
 
 int main(int argc, char const *argv[])
 {
@@ -60,15 +60,15 @@ int main(int argc, char const *argv[])
 	timer = clock();
 
 	// Decommenter la version que l'on veux tester
-	rechercheCheminVoisinPlusProche(G, n, ordre_ville);
+	//rechercheCheminVoisinPlusProche(G, n, ordre_ville);
 	//meilleurCheminRandom(G, n, ordre_ville, timer);
 	//rechercheCheminInsertion(G, n, ordre_ville, timer);
-	//assemblageAvantageux(G, n, ordre_ville);
+	assemblageAvantageux(G, n, ordre_ville);
 
 	demarrerPoint(ordre_ville, n, 0);
 
 	// Affichage l'ordre selon le voisin le plus proche
-	printf("\nAvec la recherche du plus proche voisin :");	
+	printf("\nAvec la recherche de base :");	
 	afficheCheminPoids(G, n, ordre_ville);
 
 	//Fait des recherches pendant TIMER_LIMIT secondes

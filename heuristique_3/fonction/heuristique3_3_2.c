@@ -7,7 +7,7 @@
 	void assemblageAvantageux(Graphe G, int n, int ordre_ville[]){
 		int *liste_ville = NULL;
 		liste_ville = malloc(n * sizeof(int));
-			liste_ville[ordre_ville[0]] = 1;
+		liste_ville[ordre_ville[0]] = 1;	// On se fixe a 0 comme pooint de depart pour 
 
 		// Ici i correspondra à la valeur que l'on affecteras, on va donc devoir travailler avec i+1 quand on parlera de taille d'element
 		for (int i = 0; i < n; i++)
