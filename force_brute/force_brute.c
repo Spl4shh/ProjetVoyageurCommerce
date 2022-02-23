@@ -12,16 +12,9 @@
 #include "../Fonction/table.c"
 #include "../Fonction/poids.c"
 
-#include "./permutBrute.c"
+#include "./Fonction/forceBrute.c"
 
 #define TIMER_LIMIT 1800.0
-
-/*
-  Brute force :
-  Utilise une m�thode permutation en ordre lexicographique
-  Afin de retrouver toutes les possibilitees d'ordre unique
-*/
-void bruteForce(Graphe G, int n, int ordre_ville[], clock_t timer);
 
 int main(int argc, char const *argv[]){
   // Variables
@@ -49,29 +42,9 @@ int main(int argc, char const *argv[]){
   t1 = clock();
 
   // Fait des recherches pendant TIMER_LIMIT
-  bruteForce(G, n, liste_ville, t1);
+  bruteForce(G, n, liste_ville, t1, TIMER_LIMIT);
 
   // Affichage
   affichageTimer(t1);
   afficheCheminPoids(G, n, liste_ville);
-}
-
-void bruteForce(Graphe G, int n, int ordre_ville[], clock_t timer){
-  int chemin_test[n];
-  copieTable(chemin_test, ordre_ville, n);
-  int fact = 1;
-  
-  for ( int j = 1; j <= n; j++ ){
-    fact = fact * j;
-  }
-  
-  do{
-    for ( int i = 0; i < fact; i++ ){
-      brutePermut(chemin_test, n);
-
-      if (getPoidsTotal(G, n, ordre_ville) > getPoidsTotal(G, n, chemin_test)){
-        copieTable(ordre_ville, chemin_test, n);
-      }
-    }
-  }while (timer < TIMER_LIMIT);
 }
