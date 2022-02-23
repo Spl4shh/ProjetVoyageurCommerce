@@ -15,8 +15,6 @@
 
 #include "Fonction/heuristique3_3_2.h"
 
-#define TIMER_LIMIT 5.0
-
 int main(int argc, char const *argv[])
 {
     //Variables
@@ -48,10 +46,10 @@ int main(int argc, char const *argv[])
 	// Declenche l'horloge
 	timer = clock();
 
-    assemblageAvantageux(G, n, ordre_ville);
+	assemblageAvantageux(G, n, ordre_ville);
 
-    // Affichage
-    affichageTimer(timer);
-    afficheCheminPoids(G, n, ordre_ville);
-    return 0;
+	// Affichage
+	affichageTimer(timer);
+	afficheCheminPoids(G, n, ordre_ville);
+	return 0;
 }
