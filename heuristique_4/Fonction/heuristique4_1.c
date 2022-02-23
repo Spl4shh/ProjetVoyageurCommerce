@@ -29,7 +29,7 @@
         int i = 0, j = 0;
         
         // On peut s'arreter a i = n car cela veux dire qu'on auras tout parcouru
-        while (getTempsEcoule(timer) < Timer_Limit && (i != n)){
+        while (getTempsEcoule(timer) < Timer_Limit && (i < n)){
             
             
             permutationPoint(i, j, n, ordre_ville, new_ordre_ville);
@@ -63,9 +63,9 @@
             }
 
             // Changement de point de base
-            if (j == n){
+            if (!(j < n)){
                 i++;
-                j = i+1;
+                j = i;
             }
         }
     }
