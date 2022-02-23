@@ -55,4 +55,29 @@ int lire_data(char * nom, Graphe * g, int *nb, int *m)
 	return 1;
 }
 
+
+int lireNbrIteration(){
+	/*
+	int n;
+	do{
+		printf("saisir le nombre d'iteration");
+		scanf("%d", n); 
+		//while(getchar() != '\n');
+	}while(n <= 0);
+	*/
+	
+
+	
+	int n;
+	do 
+	{ 
+		printf("saisir le nombre d'iteration"); 
+		scanf("%d", &n); 
+		while(getchar() != '\n');
+	}while (n <= 0); 
+	
+
+	return n;
+}
+
 #endif

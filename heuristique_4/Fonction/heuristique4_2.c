@@ -37,9 +37,7 @@
                 j = i+1;
             }
             
-            
             croiserPoint(i, j, n, ordre_ville, new_ordre_ville);
-            printf("Here / ");
             /* DEBUG  Affiche chaque ordre de visite testé lors des permutations
             printf("\nL'ordre de visite teste est : ");
             for (int i = 0; i < n; i++){
