@@ -74,7 +74,7 @@ int main(int argc, char const *argv[])
 	//Fait des recherches pendant TIMER_LIMIT secondes
 	rechercheParcoursPermutation(G, n, ordre_ville, timer, TIMER_LIMIT);
 
-	// Affichage resultat aprezs permutation
+	// Affichage resultat apres permutation
 	printf("\n\nAvec des permutations aleatoire :");	
 	affichageTimer(timer);
 	afficheCheminPoids(G, n, ordre_ville);
