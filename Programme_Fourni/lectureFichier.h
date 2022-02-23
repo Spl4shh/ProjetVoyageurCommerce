@@ -8,5 +8,7 @@
       // lit le nombre d'itération que l'on doit faire
       int lireNbrIteration();
       
+      // lit le fichier
+      void lireFichier(nom, *G, *n, *m);
 
 #endif
