@@ -10,7 +10,6 @@
                   point_b >= 0 
                   point_a < n
                   point_b < n
-                  point_a != point_b            
             Avec n la taille du tableau
       */
       void permutationPoint(int point_a, int point_b, int n, int ordre_ville[], int nouveau_tableau[]);
