@@ -11,7 +11,7 @@ def getCoord(r, n, df):
             return result
 
 def calibrate(bbox, window, point):
-    squale = 25
+    squale = 3
     
     xa = -window[0]/2
     xb = window[0]/2
@@ -24,6 +24,15 @@ def calibrate(bbox, window, point):
     yc = bbox[2]
     yd = bbox[3]
     yp = point[1]
+
+    x_mapmid = (bbox[0]+bbox[1])/2
+    y_mapmid = (bbox[2]+bbox[3])/2
+
+    x_mapcoef = (bbox[1]-bbox[0])/window[0]
+    y_mapcoef = (bbox[3]-bbox[2])/window[1]
+
+    x = (point[0]*x_mapcoef-x_mapmid)*squale
+    y = (point[0]*y_mapcoef-y_mapmid)*squale
     
     #x = ((point[0]-bbox[2])*(window[0]/bbox[3]))/squale   -window[0]/2)
     #y = ((point[1]-bbox[0])*(window[1]/bbox[1]))/squale   -window[1]/2)
@@ -38,11 +47,11 @@ def calibrate(bbox, window, point):
     #blubb = point[1]*(((window[1]/2)-(-window[1]/2))/100)
     #y = blubb*(bbox[3]-bbox[2])
 
-    xratio = (xp-xc)/(xd-xc)
-    x = xratio*(xa-xb)+xa
+    #xratio = (xp-xc)/(xd-xc)
+    #x = xratio*(xa-xb)+xa
 
-    yratio = (yp-yc)/(yd-yc)
-    y = yratio*(ya-yb)+ya
+    #yratio = (yp-yc)/(yd-yc)
+    #y = yratio*(ya-yb)+ya
     
     result = [x, y]
     return result
