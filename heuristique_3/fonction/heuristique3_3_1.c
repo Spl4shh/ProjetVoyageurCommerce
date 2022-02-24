@@ -32,6 +32,8 @@
 		copieTable(chemin_test, ordre_ville, n);   // Initilisation de la table de test
 
 		for(int checked = 2; checked < n-1; checked++){     // Pour chaque ville ajoutée
+		
+			//for(int i=0; )
 			for(int j = 0; j < checked; j++){               // Pour chaque position de ville testée
 				insererElementDroite(1, checked-j, chemin_test);
 
@@ -45,11 +47,11 @@
       // Appel cheminParInsertion en boucle pendant Timer_Limit avec des listes différentes, variant aléatoirement
 	void rechercheCheminInsertion(Graphe g, int n, int ordre_ville[], clock_t timer, int Timer_Limit){
 		int chemin_test[n];
-		/*for (int i = 0; i < n; i++){
+		for (int i = 0; i < n; i++){
 			ordre_ville[i] = i;
-		}*/
+		}
 
-		rechercheCheminVoisinPlusProche(g, n, ordre_ville);
+		//rechercheCheminVoisinPlusProche(g, n, ordre_ville);
 
 		copieTable(chemin_test, ordre_ville, n);    // Initilisation de la table de test
 		
