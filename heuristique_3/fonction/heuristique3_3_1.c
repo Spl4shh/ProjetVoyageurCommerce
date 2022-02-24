@@ -8,6 +8,7 @@
 	#include "heuristique3_3_1.h"
 	#include "../../Fonction/table.c"
 	#include "../../Fonction/poids.c"
+	#include "./heuristique3_2.c"
 
       // Décale les élément d'une table vers la gauche
 	void decalageVersGauche(int *table, int n){
@@ -44,9 +45,11 @@
       // Appel cheminParInsertion en boucle pendant Timer_Limit avec des listes différentes, variant aléatoirement
 	void rechercheCheminInsertion(Graphe g, int n, int ordre_ville[], clock_t timer, int Timer_Limit){
 		int chemin_test[n];
-		for (int i = 0; i < n; i++){
+		/*for (int i = 0; i < n; i++){
 			ordre_ville[i] = i;
-		}
+		}*/
+
+		rechercheCheminVoisinPlusProche(g, n, ordre_ville);
 
 		copieTable(chemin_test, ordre_ville, n);    // Initilisation de la table de test
 		
