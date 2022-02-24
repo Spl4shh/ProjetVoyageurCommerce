@@ -1,5 +1,5 @@
-#ifndef PERMUTBRUTE_H
-      #define PERMUTBRUTE_H
+#ifndef PERMUTBRUTE_C
+      #define PERMUTBRUTE_C
 
     #include "permutBrute.h"
 
