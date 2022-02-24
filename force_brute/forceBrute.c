@@ -1,5 +1,5 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 
 #include "../Programme_Fourni/graphe.h"
@@ -18,7 +18,7 @@
 
 /*
     Brute force :
-    Utilise une méthode permutation en ordre strictement croissant
+    Utilise une methode permutation en ordre strictement croissant
     Afin de retrouver toutes les possibilitees d'ordre unique
 */
 
@@ -47,10 +47,9 @@ int main(int argc, char const *argv[]){
     }
    
     t1 = clock();
-    int Timer_Limit = TIMER_LIMIT;
 
     // Fait des recherches pendant TIMER_LIMIT
-    bruteForce(G, n, liste_ville, t1, Timer_Limit);
+    bruteForce(G, n, liste_ville, t1, TIMER_LIMIT);
 
     // Affichage
     affichageTimer(t1);

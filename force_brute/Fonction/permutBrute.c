@@ -4,11 +4,11 @@
     #include "permutBrute.h"
 
 int prochainePermut(int a[], int len) {
-
     // Find non-increasing suffix
     if (len == 0) {
         return 0;
     }
+
     int i = len - 1;
     while (i > 0 && a[i - 1] >= a[i]) {
         i--;
@@ -48,11 +48,11 @@ void bruteForce(Graphe G, int n, int ordre_ville[], clock_t timer, int TIMER_LIM
     int chemin_test[n];
     copieTable(chemin_test, ordre_ville, n);
     
-      while ( prochainePermut(chemin_test, n) && ( getTempsEcoule(timer) < TIMER_LIMIT ) ) {
-         if (getPoidsTotal(G, n, ordre_ville) > getPoidsTotal(G, n, chemin_test)) {
-				   copieTable(ordre_ville, chemin_test, n);
-            }
-      }
+    while (prochainePermut(chemin_test, n) && (getTempsEcoule(timer) < TIMER_LIMIT)){
+        if (getPoidsTotal(G, n, ordre_ville) > getPoidsTotal(G, n, chemin_test)) {
+		   copieTable(ordre_ville, chemin_test, n);
+        }
+    }
       
 }
 
