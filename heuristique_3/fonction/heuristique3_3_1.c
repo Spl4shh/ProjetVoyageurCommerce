@@ -46,9 +46,7 @@
 		for (int i = 0; i < n; i++){
 			ordre_ville[i] = i;
 		}
-
-		//rechercheCheminVoisinPlusProche(g, n, ordre_ville);
-
+		
 		copieTable(chemin_test, ordre_ville, n);    // Initilisation de la table de test
 		
 		while (getTempsEcoule(timer) < Timer_Limit){    

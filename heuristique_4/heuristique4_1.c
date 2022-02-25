@@ -48,7 +48,7 @@ int main(int argc, char const *argv[])
 	ordre_ville = malloc(n * sizeof(int));
 
 	liste_ville[ville_actuelle] = 1;
-	ordre_ville[0] = ville_actuelle;
+	ordre_ville[0] = ville_actuelle; // definit pour les algo necessitant une ville de depart actuellement
 
 	//Declenche l'horloge
 	timer = clock();

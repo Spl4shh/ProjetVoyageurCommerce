@@ -26,7 +26,7 @@
 				for (int j = 1; j < i+1; j++){
 				copieTable(table_test, ordre_ville, i+1);
 
-				// Decalage dse 1 vers la droite jusqu'a la place de l'element a ajouter (J)
+				// Decalage de 1 vers la droite jusqu'a la place de l'element a ajouter (J)
 				for (int k = i; k > j /*Position de la valeur*/; k--){
 					table_test[k] = table_test[k-1];
 				}
