@@ -80,13 +80,14 @@ int lireNbrIteration(){
 	return n;
 }
 
-	void lireFichier(char *nom, Graphe *G, int *n, int *m){
-		int err;
-		do{
-			printf("saisir le nom de fichier de donnees : ");
-			scanf("%s", nom); 
-			while(getchar() != '\n');
-			err = lire_data(nom, G, n, m);
-		}while(err == 0);
-	}
+void lireFichier(char * nom, Graphe*  G, int *n, int *m){
+	int err;
+	do{
+		printf("Saisir le nom de fichier de donnees : ");
+		scanf("%s", nom); 
+		while(getchar() != '\n');
+		err = lire_data(nom, G, n, m);
+	}while(err == 0);
+}
+
 #endif

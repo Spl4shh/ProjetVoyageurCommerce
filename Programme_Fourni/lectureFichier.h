@@ -9,6 +9,6 @@
       int lireNbrIteration();
       
       // lit le fichier
-      void lireFichier(nom, *G, *n, *m);
+      void lireFichier(char * nom, Graphe * G, int *n, int *m);
 
 #endif
