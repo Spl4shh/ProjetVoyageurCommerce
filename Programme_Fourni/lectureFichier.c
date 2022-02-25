@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "graphe.h"
+#include "lectureFichier.h"
 
 /* Main de test, penser a importer affichage.h
 int main()
@@ -57,17 +58,6 @@ int lire_data(char * nom, Graphe * g, int *nb, int *m)
 
 
 int lireNbrIteration(){
-	/*
-	int n;
-	do{
-		printf("saisir le nombre d'iteration");
-		scanf("%d", n); 
-		//while(getchar() != '\n');
-	}while(n <= 0);
-	*/
-	
-
-	
 	int n;
 	do 
 	{ 
@@ -75,7 +65,6 @@ int lireNbrIteration(){
 		scanf("%d", &n); 
 		while(getchar() != '\n');
 	}while (n <= 0); 
-	
 
 	return n;
 }

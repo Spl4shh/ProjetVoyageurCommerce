@@ -25,6 +25,7 @@ int main(int argc, char const *argv[]){
     
     srand((unsigned int)time(NULL));
     
+    //Lecture de fichier
     lireFichier(nom, &G, &n, &m);
    
     // Creer la table qui va contenir le chemin final
