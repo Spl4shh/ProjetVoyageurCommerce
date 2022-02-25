@@ -20,18 +20,12 @@ int main(int argc, char const *argv[]){
     char nom[30];
     Graphe G = NULL;
     int n, m;
-    int err;
     clock_t t1;
     // END Variables
     
     srand((unsigned int)time(NULL));
     
-    do{
-		printf("saisir le nom de fichier de donnees : ");
-		scanf("%s", nom); 
-		while(getchar() != '\n');
-		err = lire_data(nom, &G, &n, &m);
-	}while(err == 0);
+    lireFichier(nom, &G, &n, &m);
    
     // Creer la table qui va contenir le chemin final
     int *ordre_ville;

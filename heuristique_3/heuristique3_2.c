@@ -20,19 +20,12 @@ int main(int argc, char const *argv[])
       char nom[30];
 	Graphe G = NULL;
 	int n, m;
-	int err;
 	clock_t timer;
       //End Variable
 
       //lecture du fichier
-      do{
-		printf("Saisir le nom de fichier de donnees : ");
-		scanf("%s", nom); 
-		while(getchar() != '\n');
-		err = lire_data(nom, &G, &n, &m);
-	}while(err == 0);
+      lireFichier(nom, &G, &n, &m);	
 
-	
 	// ordre_ville sert a sauvegarder le chemin optimal
 	int *ordre_ville = NULL;
 	ordre_ville = malloc(n * sizeof(int));

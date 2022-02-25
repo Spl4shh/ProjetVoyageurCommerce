@@ -20,26 +20,20 @@
 int main(int argc, char const *argv[]){
     // Variables
     char nom[30];
-    Graphe g = NULL;
+    Graphe G = NULL;
     int n, m;
-    int err;
     clock_t t1;
     // END Variable
 
-    do{
-		printf("saisir le nom de fichier de donnees : ");
-		scanf("%s", nom); 
-		while(getchar() != '\n');
-		err = lire_data(nom, &g, &n, &m);
-	}while(err == 0);
+    lireFichier(nom, &G, &n, &m);
    
     int *ordre_ville = NULL;
 	ordre_ville = malloc(n * sizeof(int)); 
    
     t1 = clock();
-    rechercheCheminInsertion(g, n, ordre_ville, t1, TIMER_LIMIT);
+    rechercheCheminInsertion(G, n, ordre_ville, t1, TIMER_LIMIT);
 
     // Affichage
     affichageTimer(t1);
-    afficheCheminPoids(g, n, ordre_ville);
+    afficheCheminPoids(G, n, ordre_ville);
 }

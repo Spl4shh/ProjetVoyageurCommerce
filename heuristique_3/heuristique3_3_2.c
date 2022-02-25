@@ -17,23 +17,18 @@
 
 int main(int argc, char const *argv[])
 {
-    //Variables
-    char nom[30];
+    	//Variables
+    	char nom[30];
 	Graphe G = NULL;
 	int n, m;
-	int err;
 	int ville_actuelle = 0, ville_suivante;
 	clock_t timer;
 	srand((unsigned int)time(NULL));
-    //End Variable
+    	//End Variable
 
-    //lecture du fichier
-    do{
-		printf("Saisir le nom de fichier de donnees : ");
-		scanf("%s", nom); 
-		while(getchar() != '\n');
-		err = lire_data(nom, &G, &n, &m);
-	}while(err == 0);
+    	//lecture du fichier
+      lireFichier(nom, &G, &n, &m);
+
 
 	/*
 	Liste_ville sert a verifier les villes dans lesquelles on est deja passé
