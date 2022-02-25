@@ -10,7 +10,6 @@
 	#include "../../Fonction/poids.c"
 	#include "./heuristique3_2.c"
 
-      // Décale les élément d'une table vers la gauche
 	void decalageVersGauche(int *table, int n){
 		int save = table[0];  // On stock la donnée qui va être écrasée dans une variable
 		for(int i = 0; i < n; i++){
@@ -19,14 +18,12 @@
 		table[n-1] = save;  // On ressort la donnée precedemment écrasée
 	}
 
-      // Insert un élément qui viens de la droite de la table
 	void insererElementDroite(int decalage, int rangDep, int *liste){
 		for (int i = rangDep; i > (rangDep - decalage); i--){
 			decalageVersGauche(&liste[i], 2);   // On cherche à inverser la positon de 2 éléments de la partie de la table
 		}
 	}
 	
-	// Cherche un chemin rapide en inserant de nouvelle ville une par une, en vérifiant quelle insertion est la plus rapide
 	void cheminParInsertion(Graphe g, int n, int ordre_ville[]){
 		int chemin_test[n];
 		copieTable(chemin_test, ordre_ville, n);   // Initilisation de la table de test
@@ -44,7 +41,6 @@
 		}
 	}
 
-      // Appel cheminParInsertion en boucle pendant Timer_Limit avec des listes différentes, variant aléatoirement
 	void rechercheCheminInsertion(Graphe g, int n, int ordre_ville[], clock_t timer, int Timer_Limit){
 		int chemin_test[n];
 		for (int i = 0; i < n; i++){

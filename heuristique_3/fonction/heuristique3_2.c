@@ -13,6 +13,7 @@
 		int *liste_ville = NULL, *new_ordre_ville = NULL;
 		// END Variables
 
+		// Test pour chaque point de depart
 		for (int i = 0; i < n; i++){
 			
 			liste_ville = malloc(n * sizeof(int));
@@ -23,6 +24,7 @@
 				liste_ville[h] = 0;
 			}
 			
+			// Defini la premiere ville dans le table
 			ville_actuelle = i;
 			liste_ville[ville_actuelle] = 1;
 			new_ordre_ville[0] = ville_actuelle;
@@ -32,6 +34,7 @@
 				le chemin a partir des plus proche voisin
 			*/
 			for(int j = 0; j < n; j++){	
+				// Cherche le voisin le plus proche du point actuel
 				ville_suivante = rechercheVoisinProche(G, n, ville_actuelle, liste_ville);
 
 				//On rentre ici seulement si l'on a pas exploré toutes les villes

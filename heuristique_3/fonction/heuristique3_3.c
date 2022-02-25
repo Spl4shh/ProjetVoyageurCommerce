@@ -1,7 +1,7 @@
-#ifndef HEURISTIQUE3_3_2_C
-	#define HEURISTIQUE3_3_2_C
+#ifndef HEURISTIQUE3_3_C
+	#define HEURISTIQUE3_3_C
 
-	#include "heuristique3_3_2.h"
+	#include "heuristique3_3.h"
 
 	//Peut etre essayer d'eneleer table_insertion
 	void assemblageAvantageux(Graphe G, int n, int ordre_ville[]){

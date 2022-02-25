@@ -13,7 +13,7 @@
 #include "../Fonction/table.c"
 #include "../Fonction/poids.c"
 
-#include "Fonction/heuristique3_3_2.C"
+#include "Fonction/heuristique3_3.C"
 
 int main(int argc, char const *argv[])
 {
